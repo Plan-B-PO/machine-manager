@@ -16,4 +16,12 @@ class MachineTest extends Specification {
         "the WebController is created"
         machineController
     }
+
+    def "show machine list"() {
+        when:
+        def result = machineController.getMachines()
+
+        then:
+        result == Collections.emptyList()
+    }
 }
