@@ -2,10 +2,7 @@ package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +20,11 @@ public class MachineController {
 
     @PostMapping("/machines")
     public Machine createMachines(Machine machine) {
+        return new Machine();
+    }
+
+    @GetMapping("/machine/{machineId}")
+    public Machine getMachine(@PathVariable Long machineId){
         return new Machine();
     }
 }
