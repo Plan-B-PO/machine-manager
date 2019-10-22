@@ -19,8 +19,8 @@ public class MachineController {
     }
 
     @PostMapping("/machines")
-    public Machine createMachines(Machine machine) {
-        return new Machine();
+    public Long createMachine(Machine machine) {
+        return null;
     }
 
     @GetMapping("/machine/{machineId}")

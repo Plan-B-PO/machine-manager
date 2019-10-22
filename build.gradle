@@ -31,7 +31,9 @@ dependencies {
     testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.3-groovy-2.5'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.0.RELEASE'
-    compile 'org.codehaus.gmavenplus:gmavenplus-plugin:1.8.0'
+    // https://mvnrepository.com/artifact/org.codehaus.gmavenplus/gmavenplus-plugin
+    testCompile group: 'org.codehaus.gmavenplus', name: 'gmavenplus-plugin', version: '1.8.0'
+//    compile 'org.codehaus.gmavenplus:gmavenplus-plugin:1.8.0'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
@@ -39,8 +41,4 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-}
-
-test {
-    useJUnitPlatform()
 }
