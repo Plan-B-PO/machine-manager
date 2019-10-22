@@ -31,11 +31,18 @@ class MachineTest extends Specification {
 
     def "Create new Machine"(){
         when:
-        def machine = new Machine(new Long(123), new Long(321), new Parameters(1,2), new Parameters(1,2), new Parameters(1,3), new Parameters(1,4))
+        def machine = machineController.createMachines(new Machine(new Long(123), new Long(321), new Parameters(1,2), new Parameters(1,2), new Parameters(1,3), new Parameters(1,4)))
 
         then:
         machine != null
+    }
 
+    def "get Single Machine"(){
+        when:
+        def machine = machineController.getMachine(123)
+
+        then:
+        machine != null
     }
 
 
