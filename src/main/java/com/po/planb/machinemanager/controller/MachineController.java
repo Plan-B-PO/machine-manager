@@ -1,13 +1,16 @@
 package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collections;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -21,13 +24,17 @@ public class MachineController {
     }
 
     @GetMapping("/machines")
-    public List<Machine> getMachines(Long supplierId) {
-        return Collections.emptyList();
+    public String getMachines(Model model, Long supplierId) {
+        List<Machine> machines = machineService.getMachines(10L);
+        model.addAttribute("machines", machines);
+        return "machines";
     }
 
     @PostMapping("/machines")
-    public Boolean createMachine(Machine machine) {
-        return null;
+    public String createMachine(@ModelAttribute(name = "machine") @Valid MachineForm machine, Model model) {
+        Boolean result = machineService.createMachine(machine);
+        model.addAttribute("result", result);
+        return "result";
     }
 }
 

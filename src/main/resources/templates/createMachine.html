@@ -9,22 +9,22 @@
 </head>
 <body>
 <div class="container mt-5">
-    <form action="">
+    <form action="/machine-manager/managment/machines" method="post" modelAttribute="machine">
         <div class="form-group">
             <label for="cpu">Cpu</label>
-            <input type="number" class="form-control" id="cpu">
+            <input type="number" class="form-control" id="cpu" name="cpu">
         </div>
         <div class="form-group">
             <label for="gpu">Gpu</label>
-            <input type="number" class="form-control" id="gpu">
+            <input type="number" class="form-control" id="gpu" name="gpu">
         </div>
         <div class="form-group">
             <label for="memory">Memory</label>
-            <input type="number" class="form-control" id="memory">
+            <input type="number" class="form-control" id="memory" name="memory">
         </div>
         <div class="form-group">
             <label for="localStorage">Local Storage</label>
-            <input type="number" class="form-control" id="localStorage">
+            <input type="number" class="form-control" id="localStorage" name="localStorage">
         </div>
         <button type="submit" class="btn btn-primary float-right">Create</button>
     </form>
