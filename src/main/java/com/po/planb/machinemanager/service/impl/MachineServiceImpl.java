@@ -2,9 +2,11 @@ package com.po.planb.machinemanager.service.impl;
 
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.service.MachineService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MachineServiceImpl implements MachineService {
 
     @Override
