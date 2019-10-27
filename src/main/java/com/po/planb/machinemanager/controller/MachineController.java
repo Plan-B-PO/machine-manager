@@ -4,7 +4,6 @@ import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,13 +26,8 @@ public class MachineController {
     }
 
     @PostMapping("/machines")
-    public Long createMachine(Machine machine) {
+    public Boolean createMachine(Machine machine) {
         return null;
-    }
-
-    @GetMapping("/machine/{machineId}")
-    public Machine getMachine(@PathVariable Long machineId) {
-        return new Machine();
     }
 }
 
