@@ -25,7 +25,7 @@ public class MachineController {
 
     @GetMapping("/machines")
     public String getMachines(Model model, Long supplierId) {
-        List<Machine> machines = machineService.getMachines(10L);
+        List<Machine> machines = machineService.getMachines(123L);
         model.addAttribute("machines", machines);
         return "machines";
     }

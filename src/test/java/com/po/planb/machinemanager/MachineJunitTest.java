@@ -1,5 +1,8 @@
 package com.po.planb.machinemanager;
 
+import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.model.Parameters;
+import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +17,7 @@ public class MachineJunitTest {
 
     @Test
     public void getMachines() {
-        Assert.assertNotNull(machineService.getMachines(10L));
+        Assert.assertNotNull(machineService.getMachines(123L));
     }
 
     @Test
@@ -24,6 +27,7 @@ public class MachineJunitTest {
 
     @Test
     public void createMachine() {
-//        machineService.createMachine(); //TODO add test for creating machine
+        MachineForm m = new MachineForm(1,2,3,4);
+        Assert.assertTrue(machineService.createMachine(m));
     }
 }
