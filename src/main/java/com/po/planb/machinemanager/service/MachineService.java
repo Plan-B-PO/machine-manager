@@ -10,7 +10,7 @@ public interface MachineService {
 
     List<Machine> getMachines(Long supplierId);
 
-    Machine createMachine(MachineForm machine);
+    Boolean createMachine(MachineForm machine);
 
     Optional<Machine> getMachine(Long machineId);
 

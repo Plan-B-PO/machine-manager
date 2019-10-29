@@ -34,7 +34,7 @@ public class MachineController {
 
     @PostMapping("/machines")
     public String createMachine(@ModelAttribute(name = "machine") @Valid MachineForm machine, Model model) {
-        Boolean result = machineService.createMachine(machine) != null ;
+        Boolean result = machineService.createMachine(machine);
         model.addAttribute("result", result);
         return "result";
     }

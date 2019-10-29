@@ -26,8 +26,13 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public Machine createMachine(MachineForm machine) {
-        return machineRepository.save(map(machine));
+    public Boolean createMachine(MachineForm machine) {
+        try {
+            machineRepository.save(map(machine));
+            return Boolean.TRUE;
+        }catch(Exception e){
+            return Boolean.FALSE;
+        }
     }
 
 
