@@ -5,9 +5,11 @@ import com.po.planb.machinemanager.model.Parameters;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.MachineRepository;
 import com.po.planb.machinemanager.service.MachineService;
+import org.assertj.core.util.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MachineServiceImpl implements MachineService {
@@ -20,22 +22,33 @@ public class MachineServiceImpl implements MachineService {
 
     @Override
     public List<Machine> getMachines(Long supplierId) {
-        return machineRepository.getMachines(supplierId);
+        return Lists.newArrayList(machineRepository.findBySupplierId(supplierId));
     }
 
     @Override
     public Boolean createMachine(MachineForm machine) {
-        return machineRepository.createMachine(map(machine));
+        try {
+            machineRepository.save(map(machine));
+            return Boolean.TRUE;
+        }catch(Exception e){
+            return Boolean.FALSE;
+        }
     }
 
+
     @Override
-    public Machine getMachine(Long machineId) {
-        return null;
+    public Optional<Machine> getMachine(Long machineId) {
+        return machineRepository.findById(machineId);
     }
 
     @Override
     public Boolean deleteMachine(Long machineId) {
-        return null;
+        try {
+            machineRepository.deleteById(machineId);
+            return Boolean.TRUE;
+        }catch (Exception e){
+            return Boolean.FALSE;
+        }
     }
 
     //TODO need to pass supplierId and id machine that's been created
@@ -43,7 +56,7 @@ public class MachineServiceImpl implements MachineService {
         final Integer max = 10;
         return Machine.builder()
 //                .id()
-//                .supplierId()
+                .supplierId(123L)
                 .cpus(new Parameters(machineForm.getCpu(), max))
                 .gpus(new Parameters(machineForm.getGpu(), max))
                 .memory(new Parameters(machineForm.getMemory(), max))

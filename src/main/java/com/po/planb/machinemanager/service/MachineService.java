@@ -4,6 +4,7 @@ import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.form.MachineForm;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MachineService {
 
@@ -11,7 +12,7 @@ public interface MachineService {
 
     Boolean createMachine(MachineForm machine);
 
-    Machine getMachine(Long machineId);
+    Optional<Machine> getMachine(Long machineId);
 
     Boolean deleteMachine(Long machineId);
 }
