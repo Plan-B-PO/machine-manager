@@ -7,8 +7,13 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container">
+<div class="container text-center">
     <h2 th:text="${result} ? 'Successfully created' : 'Failed to create'">tst</h2>
+    <div class="col mt-4">
+        <form action="/">
+            <button class="btn btn-primary">Complete</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

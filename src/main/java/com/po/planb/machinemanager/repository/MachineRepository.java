@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Repository
@@ -23,13 +20,13 @@ public class MachineRepository {
     public List<Machine> getMachines(Long supplierId) {
 
         List<Machine> machines = jdbcTemplate.query(
-                "SELECT * FROM machines WHERE supplierId = ?", new Object[] {supplierId},
+                "SELECT * FROM machines WHERE supplierId = ?", new Object[]{supplierId},
                 (rs, rowNum) -> new Machine(rs.getLong("id"), rs.getLong("supplierId"),
                         new Parameters(rs.getInt("cpu_current"), rs.getInt("cpu_max")),
                         new Parameters(rs.getInt("gpu_current"), rs.getInt("gpu_max")),
                         new Parameters(rs.getInt("memory_current"), rs.getInt("memory_max")),
                         new Parameters(rs.getInt("local_storage_current"), rs.getInt("local_storage_max")
-        )));
+                        )));
         return machines;
     }
 
@@ -50,7 +47,7 @@ public class MachineRepository {
             jdbcTemplate.batchUpdate("INSERT INTO machines(supplierId, cpu_current, cpu_max, gpu_current, gpu_max, memory_current, memory_max, local_storage_current, local_storage_max) VALUES (?,?,?,?,?,?,?,?,?)",
                     Collections.singletonList(params));
             return Boolean.TRUE;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return Boolean.FALSE;
         }
@@ -58,7 +55,7 @@ public class MachineRepository {
 
     public Machine getMachine(Long machineId) {
         List<Machine> machines = jdbcTemplate.query(
-                "SELECT * FROM machines WHERE id = ?", new Object[] {machineId},
+                "SELECT * FROM machines WHERE id = ?", new Object[]{machineId},
                 (rs, rowNum) -> new Machine(rs.getLong("id"), rs.getLong("supplierId"),
                         new Parameters(rs.getInt("cpu_current"), rs.getInt("cpu_max")),
                         new Parameters(rs.getInt("gpu_current"), rs.getInt("gpu_max")),
