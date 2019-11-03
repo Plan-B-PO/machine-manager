@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -12,20 +12,24 @@
     <h3>Fill machine parameters:</h3>
     <form action="/machine-manager/managment/machines" method="post" modelAttribute="machine">
         <div class="form-group">
+            <label for="id">Supplier Id</label>
+            <input type="number" class="form-control" id="id" name="id" th:value="${id}" readonly="readonly">
+        </div>
+        <div class="form-group">
             <label for="cpu">Cpu</label>
-            <input type="number" class="form-control" id="cpu" name="cpu" required>
+            <input type="number" class="form-control" id="cpu" name="cpu" required min="1">
         </div>
         <div class="form-group">
             <label for="gpu">Gpu</label>
-            <input type="number" class="form-control" id="gpu" name="gpu" required>
+            <input type="number" class="form-control" id="gpu" name="gpu" required min="1">
         </div>
         <div class="form-group">
             <label for="memory">Memory</label>
-            <input type="number" class="form-control" id="memory" name="memory" required>
+            <input type="number" class="form-control" id="memory" name="memory" required min="1">
         </div>
         <div class="form-group">
             <label for="localStorage">Local Storage</label>
-            <input type="number" class="form-control" id="localStorage" name="localStorage" required>
+            <input type="number" class="form-control" id="localStorage" name="localStorage" required min="1">
         </div>
         <button type="submit" class="btn btn-primary float-right">Create</button>
     </form>

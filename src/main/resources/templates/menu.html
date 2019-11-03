@@ -12,12 +12,16 @@
     <span th:text="'Welcome ' + ${supplierId}">tst</span>
     <div class="row my-2">
         <div class="col text-center">
-            <form action="/machine-manager/managment/machines" method="get">
+            <form th:action="@{/machine-manager/managment/machines}">
+                <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
+                       modelAttribute="supplierId"/>
                 <button class="btn btn-secondary">Show owned machines</button>
             </form>
         </div>
         <div class="col text-center">
             <form action="/create" method="get">
+                <input type="hidden" id="id" name="id" th:value="${supplierId}"
+                       modelAttribute="id"/>
                 <button class="btn btn-primary">Create</button>
             </form>
         </div>

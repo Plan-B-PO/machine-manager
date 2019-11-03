@@ -8,9 +8,11 @@
 </head>
 <body>
 <div class="container text-center">
-    <h2 th:text="${result} ? 'Successfully created' : 'Failed to create'">tst</h2>
+    <h2 th:text="'Generated token: ' + ${result}"></h2>
     <div class="col mt-4">
         <form action="/">
+            <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
+                   modelAttribute="supplierId"/>
             <button class="btn btn-primary">Complete</button>
         </form>
     </div>

@@ -5,11 +5,11 @@ import com.po.planb.machinemanager.model.Parameters;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.MachineRepository;
 import com.po.planb.machinemanager.service.MachineService;
-import org.assertj.core.util.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MachineServiceImpl implements MachineService {
@@ -22,16 +22,16 @@ public class MachineServiceImpl implements MachineService {
 
     @Override
     public List<Machine> getMachines(Long supplierId) {
-        return Lists.newArrayList(machineRepository.findBySupplierId(supplierId));
+        return machineRepository.findBySupplierId(supplierId);
     }
 
     @Override
-    public Boolean createMachine(MachineForm machine) {
+    public String createMachine(MachineForm machine) {
         try {
-            machineRepository.save(map(machine));
-            return Boolean.TRUE;
-        }catch(Exception e){
-            return Boolean.FALSE;
+            Machine savedMachine = machineRepository.save(map(machine));
+            return savedMachine.getUuid();
+        } catch (Exception e) {
+            return "Could not create machine";
         }
     }
 
@@ -46,21 +46,21 @@ public class MachineServiceImpl implements MachineService {
         try {
             machineRepository.deleteById(machineId);
             return Boolean.TRUE;
-        }catch (Exception e){
+        } catch (Exception e) {
             return Boolean.FALSE;
         }
     }
 
-    //TODO need to pass supplierId and id machine that's been created
     private Machine map(MachineForm machineForm) {
-        final Integer max = 10;
+        final Integer current = 0; //default value is 0
         return Machine.builder()
-//                .id()
-                .supplierId(123L)
-                .cpus(new Parameters(machineForm.getCpu(), max))
-                .gpus(new Parameters(machineForm.getGpu(), max))
-                .memory(new Parameters(machineForm.getMemory(), max))
-                .localStorage(new Parameters(machineForm.getLocalStorage(), max))
+                .supplierId(machineForm.getId())
+                .uuid(UUID.randomUUID().toString())
+                .cpus(new Parameters(current, machineForm.getCpu()))
+                .gpus(new Parameters(current, machineForm.getGpu()))
+                .memory(new Parameters(current, machineForm.getMemory()))
+                .localStorage(new Parameters(current, machineForm.getLocalStorage()))
                 .build();
     }
+
 }

@@ -33,6 +33,9 @@ public class Machine {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Column
+    String uuid;
+
     @Column(name = "supplierId")
     Long supplierId;
 

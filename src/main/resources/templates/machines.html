@@ -13,8 +13,8 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Machine id</th>
+                <th scope="col">UUID</th>
                 <th scope="col">Supplier id</th>
                 <th scope="col">CPUS</th>
                 <th scope="col">GPUS</th>
@@ -24,8 +24,8 @@
             </thead>
             <tbody>
             <tr th:each="machine, indexStat : ${machines}">
-                <th scope="row" th:text="${indexStat.index}"></th>
                 <td th:text="${machine.id}">12345</td>
+                <td th:text="${machine.uuid}">12345</td>
                 <td th:text="${machine.supplierId}">100</td>
                 <td th:text="${machine.cpus}">200</td>
                 <td th:text="${machine.gpus}">1024</td>
@@ -35,6 +35,11 @@
             </tbody>
         </table>
     </div>
+    <form action="/">
+        <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
+               modelAttribute="supplierId"/>
+        <button class="btn btn-primary float-left">Back</button>
+    </form>
 </div>
 </body>
 </html>
