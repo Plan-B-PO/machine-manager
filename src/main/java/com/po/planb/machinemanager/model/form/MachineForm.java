@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -19,19 +20,26 @@ public class MachineForm {
     Long id;
 
     @NotNull
-    @Min(1)
+    String name;
+
+    @NotNull
+    @Min(0)
+    @Max(100)
     Integer cpu;
 
     @NotNull
-    @Min(1)
+    @Min(0)
+    @Max(100)
     Integer gpu;
 
     @NotNull
-    @Min(1)
+    @Min(0)
+    @Max(100)
     Integer memory;
 
     @NotNull
-    @Min(1)
+    @Min(0)
+    @Max(100)
     Integer localStorage;
 
 }

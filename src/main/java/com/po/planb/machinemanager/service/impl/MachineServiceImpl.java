@@ -2,9 +2,11 @@ package com.po.planb.machinemanager.service.impl;
 
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Parameters;
+import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.MachineRepository;
 import com.po.planb.machinemanager.service.MachineService;
+import com.po.planb.machinemanager.utils.NameValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,19 +28,25 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public String createMachine(MachineForm machine) {
-        try {
-            Machine savedMachine = machineRepository.save(map(machine));
-            return savedMachine.getUuid();
-        } catch (Exception e) {
-            return "Could not create machine";
+    public Result createMachine(MachineForm machine) {
+        String name = machine.getName();
+        if (NameValidator.validate(name) && machineRepository.findByName(name) == null) {
+            try {
+                Machine savedMachine = machineRepository.save(map(machine));
+                return new Result(Boolean.TRUE, savedMachine.getUuid());
+            } catch (Exception e) {
+                return new Result(Boolean.FALSE, "Could not create machine");
+            }
+        } else {
+            return new Result(Boolean.FALSE, "Wrong machine name");
         }
     }
 
 
     @Override
-    public Optional<Machine> getMachine(Long machineId) {
-        return machineRepository.findById(machineId);
+    public Machine getMachine(Long machineId) {
+        Optional<Machine> machine = machineRepository.findById(machineId);
+        return machine.orElse(null);
     }
 
     @Override
@@ -56,6 +64,7 @@ public class MachineServiceImpl implements MachineService {
         return Machine.builder()
                 .supplierId(machineForm.getId())
                 .uuid(UUID.randomUUID().toString())
+                .name(machineForm.getName())
                 .cpus(new Parameters(current, machineForm.getCpu()))
                 .gpus(new Parameters(current, machineForm.getGpu()))
                 .memory(new Parameters(current, machineForm.getMemory()))

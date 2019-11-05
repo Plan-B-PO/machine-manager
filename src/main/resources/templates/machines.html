@@ -9,28 +9,28 @@
 <body>
 <div class="container-fluid mx-5">
     <div class="row mt-5">
-        <h2>Owned machines:</h2>
+        <h2 th:text="${supplierId} + ' owned machines:'"></h2>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Machine id</th>
-                <th scope="col">UUID</th>
-                <th scope="col">Supplier id</th>
-                <th scope="col">CPUS</th>
-                <th scope="col">GPUS</th>
-                <th scope="col">Memory</th>
-                <th scope="col">Local storage</th>
+                <th scope="col">#</th>
+                <!--                <th scope="col">UUID</th>-->
+                <th scope="col">Machine name</th>
+                <th scope="col">Status</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="machine, indexStat : ${machines}">
-                <td th:text="${machine.id}">12345</td>
-                <td th:text="${machine.uuid}">12345</td>
-                <td th:text="${machine.supplierId}">100</td>
-                <td th:text="${machine.cpus}">200</td>
-                <td th:text="${machine.gpus}">1024</td>
-                <td th:text="${machine.memory}">2048</td>
-                <td th:text="${machine.localStorage}">2048</td>
+                <td th:name="${machine.id}" th:id="${machine.id}">
+                    <form th:action="'/machine-manager/managment/machine/' + ${machine.id}">
+                        <input type="hidden" id="id" name="id" th:value="${supplierId}"
+                               modelAttribute="id"/>
+                        <button class="btn btn-info">Details</button>
+                    </form>
+                </td>
+                <!--                <td th:text="${machine.uuid}">12345</td>-->
+                <td th:text="${machine.name}">12345</td>
+                <td th:text="${machine.status} ? 'Active' : 'Disabled'">12345</td>
             </tr>
             </tbody>
         </table>

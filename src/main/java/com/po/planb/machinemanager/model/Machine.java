@@ -27,14 +27,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "machines")
+@Table(name = "machines", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
 public class Machine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+    @Column(name = "uuid")
     String uuid;
+
+    @Column(name = "name", unique = true)
+    String name;
+
+    @Column(name = "status")
+    Boolean status;
 
     @Column(name = "supplierId")
     Long supplierId;

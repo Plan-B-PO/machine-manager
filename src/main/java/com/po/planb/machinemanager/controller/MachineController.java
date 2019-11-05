@@ -1,14 +1,12 @@
 package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -33,10 +31,19 @@ public class MachineController {
 
     @PostMapping("/machines")
     public String createMachine(@ModelAttribute(name = "machine") @Valid MachineForm machine, Model model) {
-        String result = machineService.createMachine(machine);
+        Result result = machineService.createMachine(machine);
         model.addAttribute("result", result);
         model.addAttribute("supplierId", machine.getId());
         return "result";
+    }
+
+    @RequestMapping("/machine/{machineId}")
+    public String getMachineDetails(Model model, @RequestParam(name = "id") @Valid String id,
+                                    @PathVariable String machineId) {
+        Machine machine = machineService.getMachine(Long.valueOf(machineId));
+        model.addAttribute("machine", machine);
+        model.addAttribute("id", id);
+        return "machineDetails";
     }
 }
 
