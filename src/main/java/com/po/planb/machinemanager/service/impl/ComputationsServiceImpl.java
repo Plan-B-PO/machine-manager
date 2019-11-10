@@ -3,10 +3,12 @@ package com.po.planb.machinemanager.service.impl;
 import com.po.planb.machinemanager.model.Computations.MachineWithStatus;
 import com.po.planb.machinemanager.repository.Computations.MachineWithStatusRepository;
 import com.po.planb.machinemanager.service.ComputationsService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ComputationsServiceImpl implements ComputationsService {
     private final MachineWithStatusRepository machineWithStatusRepository;
 

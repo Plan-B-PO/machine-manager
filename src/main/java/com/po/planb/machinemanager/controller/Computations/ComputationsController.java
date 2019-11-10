@@ -9,7 +9,11 @@ import java.util.List;
 
 @RestController
 public class ComputationsController {
-    private ComputationsServiceImpl service;
+    private final ComputationsServiceImpl service;
+
+    public ComputationsController(ComputationsServiceImpl service) {
+        this.service = service;
+    }
 
     @PostMapping("/machine/running")
     private void activeCheckMachineStatus(@RequestBody MachineWithStatus newMachine) {
