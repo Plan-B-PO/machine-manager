@@ -3,7 +3,7 @@ package com.po.planb.machinemanager.controller;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
-import com.po.planb.machinemanager.service.impl.MachineServiceImpl;
+import com.po.planb.machinemanager.service.MachineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/machine-manager/managment")
 public class MachineController {
 
-    private final MachineServiceImpl machineService;
+    private final MachineService machineService;
 
-    public MachineController(MachineServiceImpl machineService) {
+    public MachineController(MachineService machineService) {
         this.machineService = machineService;
     }
 
