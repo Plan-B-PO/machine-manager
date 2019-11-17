@@ -10,6 +10,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Parameters implements Serializable {
-    Integer current;
-    Integer max;
+    Double current;
+    Double max;
+
+    public Double getResourceDifference() {
+        return this.max - this.current;
+    }
 }

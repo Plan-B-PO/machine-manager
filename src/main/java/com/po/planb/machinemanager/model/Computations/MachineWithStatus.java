@@ -1,28 +1,17 @@
 package com.po.planb.machinemanager.model.Computations;
 
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MachineWithStatus {
-    private Machine machine;
+    private ComputationTask computationTask;
     private ContainerStatus status;
-
-    public MachineWithStatus(Machine machine, ContainerStatus status) {
-        this.machine = machine;
-        this.status = status;
-    }
-
-    public Machine getMachine() {
-        return machine;
-    }
-
-    public void setMachine(Machine machine) {
-        this.machine = machine;
-    }
-
-    public ContainerStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ContainerStatus status) {
-        this.status = status;
-    }
 }

@@ -1,13 +1,13 @@
 package com.po.planb.machinemanager.service;
 
 import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface MachineService {
+public interface ManagementService {
 
     List<Machine> getMachines(Long supplierId);
 
@@ -16,4 +16,6 @@ public interface MachineService {
     Machine getMachine(Long machineId);
 
     Boolean deleteMachine(Long machineId);
+
+    List<Machine> getAvailableMachines(Resource resource);
 }

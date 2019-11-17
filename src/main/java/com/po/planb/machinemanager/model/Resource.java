@@ -1,4 +1,4 @@
-package com.po.planb.machinemanager.model.Computations;
+package com.po.planb.machinemanager.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Runnable {
-    String appId;
-    ComputationSteps computationSteps;
-    String version;
-
+public class Resource {
+    Double cpus;
+    Double gpus;
+    Double memory;
+    Double localStorage;
 }

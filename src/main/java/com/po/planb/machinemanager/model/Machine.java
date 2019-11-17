@@ -40,7 +40,7 @@ public class Machine {
     String name;
 
     @Column(name = "status")
-    Boolean status;
+    boolean status;
 
     @Column(name = "supplierId")
     Long supplierId;

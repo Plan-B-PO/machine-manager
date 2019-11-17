@@ -10,12 +10,15 @@ import java.util.List;
 
 
 @Repository
-public interface MachineRepository extends CrudRepository<Machine, Long> {
+public interface ManagementRepository extends CrudRepository<Machine, Long> {
 
     @Query("SELECT m FROM Machine m WHERE m.supplierId = :supplierId")
     List<Machine> findBySupplierId(@Param("supplierId") Long supplierId);
 
     @Query("SELECT m FROM Machine m WHERE m.name = :name")
     Machine findByName(@Param("name") String name);
+
+    @Query("SELECT m FROM Machine m WHERE m.status = true")
+    List<Machine> getActiveMachines();
 
 }

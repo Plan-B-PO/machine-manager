@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MachineWithStatusRepository extends MongoRepository<MachineWithStatus, String> {
-    List<MachineWithStatus> findAllByMachineAppUserId(Long id);
+    List<MachineWithStatus> findAllByComputationTaskRunnableAppId(String id);
 }

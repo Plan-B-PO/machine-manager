@@ -25,21 +25,21 @@ public class MachineForm {
     @NotNull
     @Min(0)
     @Max(100)
-    Integer cpu;
+    Double cpu;
 
     @NotNull
     @Min(0)
     @Max(100)
-    Integer gpu;
+    Double gpu;
 
     @NotNull
     @Min(0)
     @Max(100)
-    Integer memory;
+    Double memory;
 
     @NotNull
     @Min(0)
     @Max(100)
-    Integer localStorage;
+    Double localStorage;
 
 }
