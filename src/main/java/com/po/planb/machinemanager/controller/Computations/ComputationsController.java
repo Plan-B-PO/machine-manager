@@ -21,9 +21,9 @@ import java.util.Objects;
 @RequestMapping("/machine-manager/launcher")
 public class ComputationsController {
     private final ComputationsServiceImpl computationsService;
-    @Value("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/management/resources")
+    @Value("https://enigmatic-hollows-51365.herokuapp.com/resources")
     private String url;
-    @Value("http://34.67.1.173:8081/machine/computation/1")
+    @Value("http://34.67.1.173:8080/machine/computation/1")
     private String activateUrl;
 
     public ComputationsController(ComputationsServiceImpl computationsService) {
