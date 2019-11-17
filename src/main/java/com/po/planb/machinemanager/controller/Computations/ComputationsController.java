@@ -23,6 +23,8 @@ public class ComputationsController {
     private final ComputationsServiceImpl computationsService;
     @Value("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/management/resources")
     private String url;
+    @Value("http://34.67.1.173:8081/machine/computation/1")
+    private String activateUrl;
 
     public ComputationsController(ComputationsServiceImpl computationsService) {
         this.computationsService = computationsService;
@@ -45,7 +47,7 @@ public class ComputationsController {
         );
         //TODO select best machine
         computationTask.setToken(machines.get(0).getUuid());
-        restTemplate.postForObject(url, computationTask, HttpStatus.class);
+        restTemplate.postForObject(activateUrl, computationTask, HttpStatus.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 
