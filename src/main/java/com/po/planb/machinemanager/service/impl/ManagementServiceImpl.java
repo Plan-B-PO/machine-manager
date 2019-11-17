@@ -64,14 +64,16 @@ public class ManagementServiceImpl implements ManagementService {
 
     @Override
     public List<Machine> getAvailableMachines(Resource resource) {
-        List<Machine> activeMachines = managementRepository.getActiveMachines();
-        return activeMachines
-                .stream()
-                .filter(machine -> machine.getCpus().getResourceDifference() > resource.getCpus())
-                .filter(machine -> machine.getGpus().getResourceDifference() > resource.getGpus())
-                .filter(machine -> machine.getMemory().getResourceDifference() > resource.getMemory())
-                .filter(machine -> machine.getLocalStorage().getResourceDifference() > resource.getLocalStorage())
-                .collect(Collectors.toList());
+        //TODO remove this mock and get jsonb values from DB
+        return List.of(new Machine(1L, "testuuid", "test", true, 1L, null, null, null, null));
+//        List<Machine> activeMachines = managementRepository.getActiveMachines();
+//        return activeMachines
+//                .stream()
+//                .filter(machine -> machine.getCpus().getResourceDifference() > resource.getCpus())
+//                .filter(machine -> machine.getGpus().getResourceDifference() > resource.getGpus())
+//                .filter(machine -> machine.getMemory().getResourceDifference() > resource.getMemory())
+//                .filter(machine -> machine.getLocalStorage().getResourceDifference() > resource.getLocalStorage())
+//                .collect(Collectors.toList());
     }
 
     private Machine map(MachineForm machineForm) {

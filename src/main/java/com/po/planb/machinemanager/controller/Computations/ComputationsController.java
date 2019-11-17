@@ -23,7 +23,7 @@ public class ComputationsController {
     private final ComputationsServiceImpl computationsService;
     @Value("https://enigmatic-hollows-51365.herokuapp.com/resources")
     private String url;
-    @Value("http://34.67.1.173:8080/machine/computation/1")
+    @Value("http://34.67.1.173:8080/machine/computation")
     private String activateUrl;
 
     public ComputationsController(ComputationsServiceImpl computationsService) {
@@ -42,7 +42,7 @@ public class ComputationsController {
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
                 Objects.requireNonNull(
-                        restTemplate.postForObject(url, new Resource(), Machine[].class)
+                        restTemplate.postForObject(url, new Resource(1d, 1d, 1d, 1d), Machine[].class)
                 )
         );
         //TODO select best machine
