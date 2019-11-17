@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
+/**
+ * Comment this class if you want to run application locally
+ * This config is needed for heroku deployment to work properly
+ */
+
 @Configuration
 public class DatabaseConfig {
 

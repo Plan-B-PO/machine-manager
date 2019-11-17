@@ -1,10 +1,9 @@
 package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Machine;
-import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
-import com.po.planb.machinemanager.service.impl.ManagementServiceImpl;
+import com.po.planb.machinemanager.service.ManagementService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +15,9 @@ import java.util.List;
 @RequestMapping("/machine-manager/management")
 public class ManagementController {
 
-    private final ManagementServiceImpl machineService;
+    private final ManagementService machineService;
 
-    public ManagementController(ManagementServiceImpl machineService) {
+    public ManagementController(ManagementService machineService) {
         this.machineService = machineService;
     }
 
@@ -45,11 +44,6 @@ public class ManagementController {
         model.addAttribute("machine", machine);
         model.addAttribute("id", id);
         return "machineDetails";
-    }
-
-    @GetMapping("/resources")
-    public List<Machine> getAvailableMachines(Resource resouce) {
-        return machineService.getAvailableMachines(resouce);
     }
 }
 
