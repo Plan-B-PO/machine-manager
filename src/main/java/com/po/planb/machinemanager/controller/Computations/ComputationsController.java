@@ -20,11 +20,8 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/machine-manager/launcher")
 public class ComputationsController {
+
     private final ComputationsServiceImpl computationsService;
-    @Value("https://enigmatic-hollows-51365.herokuapp.com/resources")
-    private String url;
-    @Value("http://34.67.1.173:8080/machine/computation")
-    private String activateUrl;
 
     public ComputationsController(ComputationsServiceImpl computationsService) {
         this.computationsService = computationsService;
