@@ -2,7 +2,7 @@ package com.po.planb.machinemanager.service.impl;
 
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.MachineDetails;
-import com.po.planb.machinemanager.repository.ComputationsRepository;
+import com.po.planb.machinemanager.repository.Computations.ComputationsRepository;
 import com.po.planb.machinemanager.repository.MachineDetailsRepository;
 import com.po.planb.machinemanager.service.MachinesService;
 import org.springframework.stereotype.Service;
