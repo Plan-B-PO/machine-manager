@@ -5,7 +5,7 @@ import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.Computations.ComputationTaskForm;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
-import com.po.planb.machinemanager.service.impl.ComputationsServiceImpl;
+import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,9 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/machine-manager/launcher")
 public class ComputationsController {
-    private final ComputationsServiceImpl computationsService;
+    private final ComputationsService computationsService;
 
-    public ComputationsController(ComputationsServiceImpl computationsService) {
+    public ComputationsController(ComputationsService computationsService) {
         this.computationsService = computationsService;
     }
 
