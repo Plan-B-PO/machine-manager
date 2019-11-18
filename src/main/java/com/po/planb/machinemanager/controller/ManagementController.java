@@ -4,6 +4,7 @@ import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Result;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.service.ManagementService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +16,15 @@ import java.util.List;
 @RequestMapping("/machine-manager/management")
 public class ManagementController {
 
-    private final ManagementService machineService;
+    private final ManagementService managementService;
 
-    public ManagementController(ManagementService machineService) {
-        this.machineService = machineService;
+    public ManagementController(ManagementService managementService) {
+        this.managementService = managementService;
     }
 
     @RequestMapping("/machines")
     public String getMachines(Model model, @RequestParam(name = "supplierId") @Valid String supplierId) {
-        List<Machine> machines = machineService.getMachines(Long.valueOf(supplierId));
+        List<Machine> machines = managementService.getMachines(Long.valueOf(supplierId));
         model.addAttribute("machines", machines);
         model.addAttribute("supplierId", supplierId);
         return "machines";
@@ -31,7 +32,7 @@ public class ManagementController {
 
     @PostMapping("/machines")
     public String createMachine(@ModelAttribute(name = "machine") @Valid MachineForm machine, Model model) {
-        Result result = machineService.createMachine(machine);
+        Result result = managementService.createMachine(machine);
         model.addAttribute("result", result);
         model.addAttribute("supplierId", machine.getId());
         return "result";
@@ -40,10 +41,21 @@ public class ManagementController {
     @RequestMapping("/machine/{machineId}")
     public String getMachineDetails(Model model, @RequestParam(name = "id") @Valid String id,
                                     @PathVariable String machineId) {
-        Machine machine = machineService.getMachine(Long.valueOf(machineId));
+        Machine machine = managementService.getMachine(Long.valueOf(machineId));
         model.addAttribute("machine", machine);
         model.addAttribute("id", id);
         return "machineDetails";
     }
+
+    @GetMapping("/machines/{id}")
+    public Machine getMachine(@PathVariable String id) {
+        return managementService.getMachine(Long.valueOf(id));
+    }
+
+    @DeleteMapping("/machines/{id}")
+    public ResponseEntity deleteMachine(@PathVariable String id) {
+        return new ResponseEntity(managementService.deleteMachine(Long.valueOf(id)));
+    }
+
 }
 

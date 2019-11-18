@@ -8,12 +8,12 @@ import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.ManagementRepository;
 import com.po.planb.machinemanager.service.ManagementService;
 import com.po.planb.machinemanager.utils.NameValidator;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 
@@ -53,12 +53,12 @@ public class ManagementServiceImpl implements ManagementService {
     }
 
     @Override
-    public Boolean deleteMachine(Long machineId) {
+    public HttpStatus deleteMachine(Long machineId) {
         try {
             managementRepository.deleteById(machineId);
-            return Boolean.TRUE;
+            return HttpStatus.OK;
         } catch (Exception e) {
-            return Boolean.FALSE;
+            return HttpStatus.BAD_REQUEST;
         }
     }
 

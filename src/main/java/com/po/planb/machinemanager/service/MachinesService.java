@@ -1,12 +1,11 @@
 package com.po.planb.machinemanager.service;
 
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
-import com.po.planb.machinemanager.model.Machine;
-
-import java.util.List;
+import com.po.planb.machinemanager.model.MachineDetails;
 
 public interface MachinesService {
 
     void updateComputationTaskStatus(ComputationTask computationTask);
 
+    String registerMachine(MachineDetails machineDetails);
 }
