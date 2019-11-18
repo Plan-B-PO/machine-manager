@@ -42,12 +42,15 @@ public class ComputationsController {
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
                 Objects.requireNonNull(
-                        restTemplate.postForObject(url, new Resource(1d, 1d, 1d, 1d), Machine[].class)
+                        restTemplate.postForObject(
+                                System.getenv("RESOURCE_ENDPOINT"),
+                                new Resource(1d, 1d, 1d, 1d),
+                                Machine[].class)
                 )
         );
         //TODO select best machine
         computationTask.setToken(machines.get(0).getUuid());
-        restTemplate.postForObject(activateUrl, computationTask, HttpStatus.class);
+        restTemplate.postForObject(System.getenv("COMPUTATIONS_ENDPOINT"), computationTask, HttpStatus.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 
