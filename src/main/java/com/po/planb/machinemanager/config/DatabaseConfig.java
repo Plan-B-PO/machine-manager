@@ -25,4 +25,11 @@ public class DatabaseConfig {
         config.setJdbcUrl(dbUrl);
         return new HikariDataSource(config);
     }
+
+    @Bean
+    public DataSource mongoDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(System.getenv("MONGODB_COMPUTATIONS"));
+        return new HikariDataSource(config);
+    }
 }
