@@ -17,4 +17,6 @@ public interface ComputationsService {
     ComputationTask createComputationTask(ComputationTaskForm computationTaskForm);
 
     void activateComputationTask(String createdTaskId, Machine machine);
+
+    Machine determineBestMachine(List<Machine> machines);
 }

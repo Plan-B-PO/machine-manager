@@ -41,9 +41,8 @@ public class ComputationsController {
                                 Machine[].class)
                 )
         );
-        //TODO select best machine
-        computationTask.setToken(machines.get(0).getUuid());
-        restTemplate.postForObject(System.getenv("COMPUTATIONS_ENDPOINT"), computationTask, HttpStatus.class);
+        computationTask.setToken(computationsService.determineBestMachine(machines).getUuid());
+        restTemplate.postForObject(System.getenv("MACHINE_COMPUTATION_ENDPOINT"), computationTask, HttpStatus.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 
