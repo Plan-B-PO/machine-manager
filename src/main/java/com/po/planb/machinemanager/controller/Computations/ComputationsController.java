@@ -53,7 +53,7 @@ public class ComputationsController {
                 )
         );
         computationTask.setToken(computationsService.determineBestMachine(machines).getUuid());
-        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationTask, HttpStatus.class);
+        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationTask, ResponseEntity.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 
