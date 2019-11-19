@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h3>Fill computationTask parameters:</h3>
-    <form action="/machine-manager/management/machines" method="post" modelAttribute="computationTask">
+    <h3>Fill machine parameters:</h3>
+    <form action="/machine-manager/management/machines" method="post" modelAttribute="machine">
         <div class="form-group">
             <label for="id">Supplier Id</label>
             <input type="number" class="form-control" id="id" name="id" th:value="${id}" readonly="readonly">

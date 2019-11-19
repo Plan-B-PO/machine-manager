@@ -9,7 +9,7 @@
 <body>
 <div class="container-fluid mx-5">
     <div class="row mt-5">
-        <h2 th:text="'Machine ' + ${computationTask.uuid} + ' details:'"></h2>
+        <h2 th:text="'Machine ' + ${machine.uuid} + ' details:'"></h2>
         <table class="table">
             <thead>
             <tr>
@@ -22,11 +22,11 @@
             </thead>
             <tbody>
             <tr>
-                <td th:text="${computationTask.name}">12345</td>
-                <td th:text="${computationTask.cpus}">200</td>
-                <td th:text="${computationTask.gpus}">1024</td>
-                <td th:text="${computationTask.memory}">2048</td>
-                <td th:text="${computationTask.localStorage}">2048</td>
+                <td th:text="${machine.name}">12345</td>
+                <td th:text="${machine.cpus}">200</td>
+                <td th:text="${machine.gpus}">1024</td>
+                <td th:text="${machine.memory}">2048</td>
+                <td th:text="${machine.localStorage}">2048</td>
             </tr>
             </tbody>
         </table>

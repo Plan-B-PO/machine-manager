@@ -18,7 +18,7 @@ public class MachinesController {
 
     private MachinesService machinesService;
 
-    @Value("http://34.67.1.173:8080/machine/computation")
+    @Value("http://34.69.134.162:8080/machine/computation")
     private String COMPUTATIONS_ENDPOINT;
 
     MachinesController(MachinesService machinesService) {

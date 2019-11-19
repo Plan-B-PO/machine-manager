@@ -21,7 +21,7 @@ public class ComputationsController {
 
     private final ComputationsService computationsService;
 
-    @Value("http://34.67.1.173:8080/machine/computation")
+    @Value("http://34.69.134.162:8080/machine/computation")
     private String COMPUTATIONS_ENDPOINT;
 
     @Value("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/machines/computation")

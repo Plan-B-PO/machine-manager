@@ -20,17 +20,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="computationTask, indexStat : ${machines}">
-                <td th:name="${computationTask.id}" th:id="${computationTask.id}">
-                    <form th:action="'/computationTask-manager/management/computationTask/' + ${computationTask.id}">
+            <tr th:each="machine, indexStat : ${machines}">
+                <td th:name="${machine.id}" th:id="${machine.id}">
+                    <form th:action="'/manager/management/machine/' + ${machine.id}">
                         <input type="hidden" id="id" name="id" th:value="${supplierId}"
                                modelAttribute="id"/>
                         <button class="btn btn-info">Details</button>
                     </form>
                 </td>
-                <!--                <td th:text="${computationTask.uuid}">12345</td>-->
-                <td th:text="${computationTask.name}">12345</td>
-                <td th:text="${computationTask.status} ? 'Active' : 'Disabled'">12345</td>
+                <!--                <td th:text="${machine.uuid}">12345</td>-->
+                <td th:text="${machine.name}">12345</td>
+                <td th:text="${machine.status} ? 'Active' : 'Disabled'">12345</td>
             </tr>
             </tbody>
         </table>
