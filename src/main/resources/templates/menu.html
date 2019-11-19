@@ -12,7 +12,7 @@
     <span th:text="'Welcome ' + ${supplierId}">tst</span>
     <div class="row my-2">
         <div class="col text-center">
-            <form th:action="@{/computationTask-manager/managment/machines}">
+            <form th:action="@{/machine-manager/managment/machines}">
                 <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
                        modelAttribute="supplierId"/>
                 <button class="btn btn-secondary">Show owned machines</button>
