@@ -69,10 +69,10 @@ public class ManagementServiceImpl implements ManagementService {
 //        List<Machine> activeMachines = managementRepository.getActiveMachines();
 //        return activeMachines
 //                .stream()
-//                .filter(machine -> machine.getCpus().getResourceDifference() > resource.getCpus())
-//                .filter(machine -> machine.getGpus().getResourceDifference() > resource.getGpus())
-//                .filter(machine -> machine.getMemory().getResourceDifference() > resource.getMemory())
-//                .filter(machine -> machine.getLocalStorage().getResourceDifference() > resource.getLocalStorage())
+//                .filter(machine -> machine.getCpus().calculateResourceDifference() > resource.getCpus())
+//                .filter(machine -> machine.getGpus().calculateResourceDifference() > resource.getGpus())
+//                .filter(machine -> machine.getMemory().calculateResourceDifference() > resource.getMemory())
+//                .filter(machine -> machine.getLocalStorage().calculateResourceDifference() > resource.getLocalStorage())
 //                .collect(Collectors.toList());
     }
 

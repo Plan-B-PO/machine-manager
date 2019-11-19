@@ -1,9 +1,9 @@
 package com.po.planb.machinemanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class Parameters implements Serializable {
     Double max;
 
     @JsonIgnore
-    public Double getResourceDifference() {
+    public Double calculateResourceDifference() {
         return this.max - this.current;
     }
 }
