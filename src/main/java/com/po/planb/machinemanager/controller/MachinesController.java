@@ -38,7 +38,7 @@ public class MachinesController {
     @PostMapping("/computation")
     public ResponseEntity activateComputationTask(@RequestBody ComputationTask computationTask) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationTask, HttpStatus.class);
+        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationTask, Void.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
