@@ -3,6 +3,7 @@ package com.po.planb.machinemanager.controller;
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.MachineDetails;
 import com.po.planb.machinemanager.service.MachinesService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 public class MachinesController {
 
     private MachinesService machinesService;
+
+    @Value("http://34.67.1.173:8080/machine/computation")
+    private String COMPUTATIONS_ENDPOINT;
 
     MachinesController(MachinesService machinesService) {
         this.machinesService = machinesService;
@@ -34,7 +38,7 @@ public class MachinesController {
     @PostMapping("/computation")
     public ResponseEntity activateComputationTask(@RequestBody ComputationTask computationTask) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(System.getenv("COMPUTATIONS_ENDPOINT"), computationTask, HttpStatus.class);
+        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationTask, HttpStatus.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

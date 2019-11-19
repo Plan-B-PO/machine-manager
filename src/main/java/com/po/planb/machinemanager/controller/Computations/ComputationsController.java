@@ -6,6 +6,7 @@ import com.po.planb.machinemanager.model.Computations.ComputationTaskForm;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.service.ComputationsService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,17 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/machine-manager/launcher")
 public class ComputationsController {
+
     private final ComputationsService computationsService;
+
+    @Value("http://34.67.1.173:8080/machine/computation")
+    private String COMPUTATIONS_ENDPOINT;
+
+    @Value("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/machines/computation")
+    private String MACHINE_COMPUTATION_ENDPOINT;
+
+    @Value("https://enigmatic-hollows-51365.herokuapp.com/resources")
+    private String RESOURCE_ENDPOINT;
 
     public ComputationsController(ComputationsService computationsService) {
         this.computationsService = computationsService;
@@ -36,20 +47,20 @@ public class ComputationsController {
         List<Machine> machines = List.of(
                 Objects.requireNonNull(
                         restTemplate.postForObject(
-                                System.getenv("RESOURCE_ENDPOINT"),
+                                RESOURCE_ENDPOINT,
                                 new Resource(1d, 1d, 1d, 1d),
                                 Machine[].class)
                 )
         );
         computationTask.setToken(computationsService.determineBestMachine(machines).getUuid());
-        restTemplate.postForObject(System.getenv("MACHINE_COMPUTATION_ENDPOINT"), computationTask, HttpStatus.class);
+        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationTask, HttpStatus.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/computations/{id}")
     public ResponseEntity cancelComputationTask(@PathVariable String id) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(System.getenv("COMPUTATIONS_ENDPOINT") + "/" + id, id);
+        restTemplate.delete(COMPUTATIONS_ENDPOINT + "/" + id, id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
