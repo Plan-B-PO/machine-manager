@@ -22,7 +22,7 @@
             <tbody>
             <tr th:each="computationTask, indexStat : ${machines}">
                 <td th:name="${computationTask.id}" th:id="${computationTask.id}">
-                    <form th:action="'/computationTask-manager/managment/computationTask/' + ${computationTask.id}">
+                    <form th:action="'/computationTask-manager/management/computationTask/' + ${computationTask.id}">
                         <input type="hidden" id="id" name="id" th:value="${supplierId}"
                                modelAttribute="id"/>
                         <button class="btn btn-info">Details</button>
