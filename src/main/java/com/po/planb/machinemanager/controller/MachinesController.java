@@ -26,7 +26,7 @@ public class MachinesController {
     }
 
     @PostMapping("/status")
-    public void updateComputationTasks(ComputationTask computationTasks) {
+    public void updateComputationTasks(@RequestBody ComputationTask computationTasks) {
         machinesService.updateComputationTaskStatus(computationTasks);
     }
 
