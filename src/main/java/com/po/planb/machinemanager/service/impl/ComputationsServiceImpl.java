@@ -41,7 +41,7 @@ public class ComputationsServiceImpl implements ComputationsService {
     //TODO to refactor
     private ComputationTask map(ComputationTaskForm form) {
         ComputationSteps computationSteps = new ComputationSteps(
-                mapStepParamToParams(form.getApplication().getSchema()), "busybox", "command");
+                null, "busybox", "command");
         Runnable runnable = new Runnable(form.getApplication().getId(), computationSteps, form.getVersion());
         ChosenMachine chosenMachine = new ChosenMachine("machineId", form.getUserId(), runnable, "");
         return ComputationTask.builder()
