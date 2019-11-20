@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ChosenMachine {
     String id;
-    Long appUserId;
+    String appUserId;
     Runnable runnable;
     String input;
 }

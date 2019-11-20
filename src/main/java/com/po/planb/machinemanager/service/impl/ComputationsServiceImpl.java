@@ -43,7 +43,7 @@ public class ComputationsServiceImpl implements ComputationsService {
         ComputationSteps computationSteps = new ComputationSteps(
                 null, form.getUrl(), null);
         Runnable runnable = new Runnable(null, computationSteps, form.getVersion());
-        ChosenMachine chosenMachine = new ChosenMachine("", Long.valueOf(form.getUserId()), runnable, "");
+        ChosenMachine chosenMachine = new ChosenMachine("", form.getUserId(), runnable, "");
         return ComputationTask.builder()
                 .machine(chosenMachine)
                 .status(ComputationStatus.CREATED)
