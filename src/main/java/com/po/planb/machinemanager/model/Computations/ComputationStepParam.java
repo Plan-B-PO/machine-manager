@@ -10,12 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ComputationTaskForm {
-    String id;
-    String userId;
+public class ComputationStepParam {
     String name;
-    ComputationApplication application;
-    ComputationInput input;
-    String url;
-    String version;
+    String type;
 }

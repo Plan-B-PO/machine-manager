@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Runnable {
-    String appId;
+    String applicationId;
     ComputationSteps computationSteps;
     String version;
 

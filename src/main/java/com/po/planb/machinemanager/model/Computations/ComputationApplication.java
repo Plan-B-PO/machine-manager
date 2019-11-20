@@ -1,6 +1,5 @@
 package com.po.planb.machinemanager.model.Computations;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +10,10 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MachineWithStatus {
-    private ComputationTask computationTask;
-    private ContainerStatus status;
+public class ComputationApplication {
+    String id;
+    String name;
+    String description;
+    String icon;
+    ComputationStepParam schema;
 }

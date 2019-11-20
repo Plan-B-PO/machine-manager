@@ -4,12 +4,12 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ComputationTask {
-    String token;
-    ComputationStatus status;
-    ChosenMachine machine;
+public class ChosenMachine {
+    String id;
+    Long appUserId;
+    Runnable runnable;
+    String input;
 }
