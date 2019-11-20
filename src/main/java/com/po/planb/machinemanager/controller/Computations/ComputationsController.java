@@ -41,7 +41,7 @@ public class ComputationsController {
     }
 
     @PostMapping("/computations")
-    public ResponseEntity runComputationTask(ComputationTaskForm computationTaskForm) {
+    public ResponseEntity runComputationTask(@RequestBody ComputationTaskForm computationTaskForm) {
         ComputationTask computationTask = computationsService.createComputationTask(computationTaskForm);
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
