@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ComputationsRepository extends MongoRepository<ComputationTask, Optional> {
-    ComputationTask findByRunnableAppId(String id);
+    ComputationTask findByMachineRunnableApplicationId(String id);
 }
