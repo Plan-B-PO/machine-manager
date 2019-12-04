@@ -9,7 +9,10 @@
 <body>
 <div class="container-fluid mx-5">
     <div class="row mt-5">
-        <h2 th:text="'Machine ' + ${machine.uuid} + ' details:'"></h2>
+        <div>
+            <button class="btn btn-info" onclick="showToken()">Show token</button>
+        </div>
+        <h2 id="token" th:text="'Machine ' + ${machine.uuid} + ' details:'" style="display: none"></h2>
         <table class="table">
             <thead>
             <tr>
