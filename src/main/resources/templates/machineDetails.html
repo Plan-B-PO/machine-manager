@@ -26,6 +26,7 @@
                 <th scope="col">GPUS[GB]</th>
                 <th scope="col">Memory[GB]</th>
                 <th scope="col">Local storage[GB]</th>
+                <th scope="col">Status</th>
             </tr>
             </thead>
             <tbody>
@@ -35,6 +36,7 @@
                 <td th:text="${machine.gpus}">1024</td>
                 <td th:text="${machine.memory}">2048</td>
                 <td th:text="${machine.localStorage}">2048</td>
+                <td th:text="${machine.status}">UNKNOWN</td>
             </tr>
             </tbody>
         </table>

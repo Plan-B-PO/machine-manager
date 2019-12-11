@@ -40,10 +40,10 @@ public class Machine {
     String name;
 
     @Column(name = "status")
-    boolean status;
+    Status status;
 
     @Column(name = "supplierId")
-    Long supplierId;
+    String supplierId;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "cpus")

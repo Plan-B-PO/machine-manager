@@ -39,6 +39,7 @@ public class MachinesController {
     public ResponseEntity activateComputationTask(@RequestBody ComputationTask computationTask) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationTask, Void.class);
+        machinesService.activateMachine(computationTask.getToken());
         return new ResponseEntity(HttpStatus.OK);
     }
 }

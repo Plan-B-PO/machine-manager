@@ -24,7 +24,7 @@ public class ManagementController {
 
     @RequestMapping("/machines")
     public String getMachines(Model model, @RequestParam(name = "supplierId") @Valid String supplierId) {
-        List<Machine> machines = managementService.getMachines(Long.valueOf(supplierId));
+        List<Machine> machines = managementService.getMachines(supplierId);
         model.addAttribute("machines", machines);
         model.addAttribute("supplierId", supplierId);
         return "machines";

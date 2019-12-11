@@ -1,9 +1,6 @@
 package com.po.planb.machinemanager.service.impl;
 
-import com.po.planb.machinemanager.model.Machine;
-import com.po.planb.machinemanager.model.Parameters;
-import com.po.planb.machinemanager.model.Resource;
-import com.po.planb.machinemanager.model.Result;
+import com.po.planb.machinemanager.model.*;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.ManagementRepository;
 import com.po.planb.machinemanager.service.ManagementService;
@@ -26,14 +23,14 @@ public class ManagementServiceImpl implements ManagementService {
     }
 
     @Override
-    public List<Machine> getMachines(Long supplierId) {
+    public List<Machine> getMachines(String supplierId) {
         return managementRepository.findBySupplierId(supplierId);
     }
 
     @Override
     public Result createMachine(MachineForm machine) {
         String name = machine.getName();
-        if (NameValidator.validate(name) && managementRepository.findByName(name) == null) {
+        if (managementRepository.findByName(name) == null) {
             try {
                 Machine savedMachine = managementRepository.save(map(machine));
                 return new Result(Boolean.TRUE, savedMachine.getUuid());
@@ -65,7 +62,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public List<Machine> getAvailableMachines(Resource resource) {
         //TODO remove this mock and get jsonb values from DB
-        return List.of(new Machine(1L, "testuuid", "test", true, 1L, null, null, null, null));
+        return List.of(new Machine(1L, "testuuid", "test", Status.WAITING, "id", null, null, null, null));
 //        List<Machine> activeMachines = managementRepository.getActiveMachines();
 //        return activeMachines
 //                .stream()
@@ -86,6 +83,7 @@ public class ManagementServiceImpl implements ManagementService {
                 .gpus(new Parameters(current, machineForm.getGpu()))
                 .memory(new Parameters(current, machineForm.getMemory()))
                 .localStorage(new Parameters(current, machineForm.getLocalStorage()))
+                .status(Status.UNKNOWN)
                 .build();
     }
 

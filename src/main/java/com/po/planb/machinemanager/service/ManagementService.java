@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ManagementService {
 
-    List<Machine> getMachines(Long supplierId);
+    List<Machine> getMachines(String supplierId);
 
     Result createMachine(MachineForm machine);
 
