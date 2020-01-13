@@ -8,6 +8,7 @@ import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ComputationsServiceImpl implements ComputationsService {
@@ -36,6 +37,16 @@ public class ComputationsServiceImpl implements ComputationsService {
     public Machine determineBestMachine(List<Machine> machines) {
         //TODO select best machine
         return machines.get(0);
+    }
+
+    @Override
+    public String checkComputationStatus(String id) {
+        ComputationTask ct = computationsRepository.findByToken(id);
+        if (ct != null && ct.getStatus() != null) {
+            return ct.getStatus().name();
+        } else {
+            throw new NoSuchElementException("Element with token: " + id + " cannot be found");
+        }
     }
 
     //TODO to refactor

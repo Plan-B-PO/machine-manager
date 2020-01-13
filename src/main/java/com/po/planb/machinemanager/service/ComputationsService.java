@@ -14,4 +14,6 @@ public interface ComputationsService {
     void activateComputationTask(String createdTaskId, Machine machine);
 
     Machine determineBestMachine(List<Machine> machines);
+
+    String checkComputationStatus(String id);
 }
