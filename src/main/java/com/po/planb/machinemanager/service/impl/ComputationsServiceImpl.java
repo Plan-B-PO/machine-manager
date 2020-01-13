@@ -41,7 +41,7 @@ public class ComputationsServiceImpl implements ComputationsService {
 
     @Override
     public String checkComputationStatus(String id) {
-        ComputationTask ct = computationsRepository.findByToken(id);
+        ComputationTask ct = computationsRepository.findById(id);
         if (ct != null && ct.getStatus() != null) {
             return ct.getStatus().name();
         } else {
@@ -56,6 +56,7 @@ public class ComputationsServiceImpl implements ComputationsService {
         Runnable runnable = new Runnable(form.getApplication().getId(), computationSteps, form.getVersion());
         ChosenMachine chosenMachine = new ChosenMachine("machineId", form.getUserId(), runnable, "");
         return ComputationTask.builder()
+                .id(form.getId())
                 .machine(chosenMachine)
                 .status(ComputationStatus.CREATED)
                 .build();
