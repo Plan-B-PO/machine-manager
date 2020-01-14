@@ -60,7 +60,7 @@ public class SupplierService {
         try {
             UserInfo info = request.execute();
             Map<String, Object> values = info.getValues();
-            String sub = values.get("sub").toString();
+            String sub = values.get("sub").toString().substring(6);
             HttpResponse<String> response = null;
             try {
                 response = Unirest.get("https://utnickir.eu.auth0.com/api/v2/connections/" + sub + "?fields=options")
