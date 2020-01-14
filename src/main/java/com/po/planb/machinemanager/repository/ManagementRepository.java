@@ -18,7 +18,7 @@ public interface ManagementRepository extends CrudRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m WHERE m.name = :name")
     Machine findByName(@Param("name") String name);
 
-    @Query("SELECT m FROM Machine m WHERE m.status = 'ACTIVE' ")
+    @Query("SELECT m FROM Machine m WHERE m.status = 1")
     List<Machine> getActiveMachines();
 
     @Query("UPDATE Machine SET status = :uuid")
