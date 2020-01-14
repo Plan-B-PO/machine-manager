@@ -36,7 +36,7 @@ public class Machine {
     @Column(name = "uuid")
     String uuid;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     String name;
 
     @Column(name = "status")

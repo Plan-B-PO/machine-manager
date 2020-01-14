@@ -30,11 +30,11 @@ public class ManagementServiceImpl implements ManagementService {
     }
 
     @Override
-    public Result createMachine(MachineForm machine) {
+    public Result createMachine(MachineForm machine, String username) {
         String name = machine.getName();
-        if (managementRepository.findByName(name) == null) {
+        if (managementRepository.findByName(name, username) == null) {
             try {
-                Machine savedMachine = managementRepository.save(map(machine));
+                Machine savedMachine = managementRepository.save(map(machine, username));
                 return new Result(Boolean.TRUE, savedMachine.getUuid());
             } catch (Exception e) {
                 return new Result(Boolean.FALSE, "Could not create machine");
@@ -63,8 +63,6 @@ public class ManagementServiceImpl implements ManagementService {
 
     @Override
     public List<Machine> getAvailableMachines(Resource resource) {
-        //TODO remove this mock and get jsonb values from DB
-//        return List.of(new Machine(1L, "testuuid", "test", Status.WAITING, "id", null, null, null, null));
         List<Machine> activeMachines = managementRepository.getActiveMachines();
         List<Machine> filteredActiveMachines = activeMachines
                 .stream()
@@ -79,10 +77,10 @@ public class ManagementServiceImpl implements ManagementService {
         return filteredActiveMachines;
     }
 
-    private Machine map(MachineForm machineForm) {
+    private Machine map(MachineForm machineForm, String username) {
         final Double current = 0d; //default value is 0
         return Machine.builder()
-                .supplierId(machineForm.getId())
+                .supplierId(username)
                 .uuid(UUID.randomUUID().toString())
                 .name(machineForm.getName())
                 .cpus(new Parameters(current, machineForm.getCpu()))

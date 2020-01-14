@@ -35,7 +35,6 @@ public class ComputationsServiceImpl implements ComputationsService {
 
     @Override
     public Machine determineBestMachine(List<Machine> machines) {
-        //TODO select best machine
         return machines.get(0);
     }
 

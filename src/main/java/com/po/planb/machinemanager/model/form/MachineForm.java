@@ -16,9 +16,6 @@ import javax.validation.constraints.NotNull;
 public class MachineForm {
 
     @NotNull
-    String id;
-
-    @NotNull
     String name;
 
     @NotNull

@@ -10,11 +10,11 @@
 <body>
 <div class="container mt-5">
     <h3>Fill machine parameters:</h3>
+    <div class="form-group">
+        <label for="id">Supplier Id</label>
+        <input type="text" class="form-control" id="id" name="id" th:value="${id}" readonly="readonly">
+    </div>
     <form action="/machine-manager/management/machines" method="post" modelAttribute="machine">
-        <div class="form-group">
-            <label for="id">Supplier Id</label>
-            <input type="text" class="form-control" id="id" name="id" th:value="${id}" readonly="readonly">
-        </div>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" required>

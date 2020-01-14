@@ -11,8 +11,6 @@
     <h2 th:text="${result.status} ? 'Generated token: ' + ${result.value} : 'Wrong name given'"></h2>
     <div class="col mt-4">
         <form action="/machine-manager/management/machines">
-            <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
-                   modelAttribute="supplierId"/>
             <button th:if="${result.status}" class="btn btn-primary">Complete</button>
             <button th:unless="${result.status}" class="btn btn-danger">Back</button>
         </form>

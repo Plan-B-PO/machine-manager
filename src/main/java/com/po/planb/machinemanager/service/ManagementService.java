@@ -12,7 +12,7 @@ public interface ManagementService {
 
     List<Machine> getMachines(String supplierId);
 
-    Result createMachine(MachineForm machine);
+    Result createMachine(MachineForm machine, String username);
 
     Machine getMachine(Long machineId);
 

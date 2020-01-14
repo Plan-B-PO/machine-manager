@@ -14,7 +14,6 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <!--                <th scope="col">UUID</th>-->
                 <th scope="col">Machine name</th>
                 <th scope="col">Status</th>
             </tr>
@@ -23,12 +22,9 @@
             <tr th:each="machine, indexStat : ${machines}">
                 <td th:name="${machine.id}" th:id="${machine.id}">
                     <form th:action="'/machine-manager/management/machine/' + ${machine.id}">
-                        <input type="hidden" id="id" name="id" th:value="${supplierId}"
-                               modelAttribute="id"/>
                         <button class="btn btn-info">Details</button>
                     </form>
                 </td>
-                <!--                <td th:text="${machine.uuid}">12345</td>-->
                 <td th:text="${machine.name}">12345</td>
                 <td th:text="${machine.status}">12345</td>
             </tr>
@@ -36,8 +32,6 @@
         </table>
     </div>
     <form action="/">
-        <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
-               modelAttribute="supplierId"/>
         <button class="btn btn-primary float-left">Back</button>
     </form>
 </div>

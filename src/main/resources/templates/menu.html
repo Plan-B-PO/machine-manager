@@ -9,19 +9,16 @@
 <body>
 <div class="container">
     <h2>Menu:</h2>
-    <span th:text="'Welcome ' + ${supplierId}">tst</span>
+    <span th:text="'Welcome ' + ${username}">tst</span>
+    <a href="/logout">Logout</a>
     <div class="row my-2">
         <div class="col text-center">
             <form th:action="@{/machine-manager/management/machines}">
-                <input type="hidden" id="supplierId" name="supplierId" th:value="${supplierId}"
-                       modelAttribute="supplierId"/>
                 <button class="btn btn-secondary">Show owned machines</button>
             </form>
         </div>
         <div class="col text-center">
             <form action="/create" method="get">
-                <input type="hidden" id="id" name="id" th:value="${supplierId}"
-                       modelAttribute="id"/>
                 <button class="btn btn-primary">Create</button>
             </form>
         </div>

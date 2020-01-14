@@ -15,8 +15,8 @@ public interface ManagementRepository extends CrudRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m WHERE m.supplierId = :supplierId")
     List<Machine> findBySupplierId(@Param("supplierId") String supplierId);
 
-    @Query("SELECT m FROM Machine m WHERE m.name = :name")
-    Machine findByName(@Param("name") String name);
+    @Query("SELECT m FROM Machine m WHERE m.name = :name AND m.supplierId = :username")
+    Machine findByName(@Param("name") String name, @Param("username") String username);
 
     @Query("SELECT m FROM Machine m WHERE m.status = 1")
     List<Machine> getActiveMachines();
