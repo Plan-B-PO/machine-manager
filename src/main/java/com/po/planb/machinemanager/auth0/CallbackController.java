@@ -48,6 +48,7 @@ public class CallbackController {
             String idToken = tokens.getIdToken();
             SessionUtils.set(request, "idToken", idToken);
             SessionUtils.set(request, "username", supplierService.getUserInfo(accessToken, idToken));
+            SessionUtils.set(request, "role", supplierService.getRole(accessToken, idToken));
             response.sendRedirect(redirectOnSuccess);
         } catch (IdentityVerificationException e) {
             e.printStackTrace();
