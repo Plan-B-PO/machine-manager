@@ -14,19 +14,19 @@ public class AppConfig {
     /**
      * This is your auth0 domain (tenant you have created when registering with auth0 - account name)
      */
-    @Value(value = "utnickir.eu.auth0.com")
+    @Value(value = "${com.po.planb.domain}")
     private String domain;
 
     /**
      * This is the client id of your auth0 application (see Settings page on auth0 dashboard)
      */
-    @Value(value = "iiQzTcmBYGq5vN4sfbLlOMB9D5VuJWRD")
+    @Value(value = "${com.po.planb.clientId}")
     private String clientId;
 
     /**
      * This is the client secret of your auth0 application (see Settings page on auth0 dashboard)
      */
-    @Value(value = "7FiVcecUlgvH5yc2allJHwnDLoSvoX9Gw06Cqbp5Td7rMvthw08LhfhaNDOG9Oxf")
+    @Value(value = "${com.po.planb.clientSecret}")
     private String clientSecret;
 
     @Bean
