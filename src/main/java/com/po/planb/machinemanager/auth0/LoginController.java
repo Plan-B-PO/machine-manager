@@ -21,7 +21,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     protected String login(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("Performing login");
-        String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/callback";
+        String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + "443" + "/callback";
         String authorizeUrl = controller.buildAuthorizeUrl(request, response, redirectUri);
         return "redirect:" + authorizeUrl;
     }
