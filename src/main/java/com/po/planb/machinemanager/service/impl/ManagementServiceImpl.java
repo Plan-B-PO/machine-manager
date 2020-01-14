@@ -4,11 +4,12 @@ import com.po.planb.machinemanager.model.*;
 import com.po.planb.machinemanager.model.form.MachineForm;
 import com.po.planb.machinemanager.repository.ManagementRepository;
 import com.po.planb.machinemanager.service.ManagementService;
-import com.po.planb.machinemanager.utils.NameValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -65,13 +66,17 @@ public class ManagementServiceImpl implements ManagementService {
         //TODO remove this mock and get jsonb values from DB
 //        return List.of(new Machine(1L, "testuuid", "test", Status.WAITING, "id", null, null, null, null));
         List<Machine> activeMachines = managementRepository.getActiveMachines();
-        return activeMachines
+        List<Machine> filteredActiveMachines = activeMachines
                 .stream()
                 .filter(machine -> machine.getCpus().calculateResourceDifference() > resource.getCpus())
                 .filter(machine -> machine.getGpus().calculateResourceDifference() > resource.getGpus())
                 .filter(machine -> machine.getMemory().calculateResourceDifference() > resource.getMemory())
                 .filter(machine -> machine.getLocalStorage().calculateResourceDifference() > resource.getLocalStorage())
                 .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(filteredActiveMachines)) {
+            throw new NoSuchElementException("No machines available");
+        }
+        return filteredActiveMachines;
     }
 
     private Machine map(MachineForm machineForm) {

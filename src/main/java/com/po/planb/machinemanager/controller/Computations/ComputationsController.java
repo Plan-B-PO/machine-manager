@@ -49,7 +49,7 @@ public class ComputationsController {
                         restTemplate.postForObject(
                                 RESOURCE_ENDPOINT,
                                 new Resource(1d, 1d, 1d, 1d),
-                                Machine[].class)
+                                Machine[].class), "Available machines cannot be null"
                 )
         );
         computationTask.setToken(computationsService.determineBestMachine(machines).getUuid());
