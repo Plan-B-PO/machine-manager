@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -62,15 +63,15 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public List<Machine> getAvailableMachines(Resource resource) {
         //TODO remove this mock and get jsonb values from DB
-        return List.of(new Machine(1L, "testuuid", "test", Status.WAITING, "id", null, null, null, null));
-//        List<Machine> activeMachines = managementRepository.getActiveMachines();
-//        return activeMachines
-//                .stream()
-//                .filter(machine -> machine.getCpus().calculateResourceDifference() > resource.getCpus())
-//                .filter(machine -> machine.getGpus().calculateResourceDifference() > resource.getGpus())
-//                .filter(machine -> machine.getMemory().calculateResourceDifference() > resource.getMemory())
-//                .filter(machine -> machine.getLocalStorage().calculateResourceDifference() > resource.getLocalStorage())
-//                .collect(Collectors.toList());
+//        return List.of(new Machine(1L, "testuuid", "test", Status.WAITING, "id", null, null, null, null));
+        List<Machine> activeMachines = managementRepository.getActiveMachines();
+        return activeMachines
+                .stream()
+                .filter(machine -> machine.getCpus().calculateResourceDifference() > resource.getCpus())
+                .filter(machine -> machine.getGpus().calculateResourceDifference() > resource.getGpus())
+                .filter(machine -> machine.getMemory().calculateResourceDifference() > resource.getMemory())
+                .filter(machine -> machine.getLocalStorage().calculateResourceDifference() > resource.getLocalStorage())
+                .collect(Collectors.toList());
     }
 
     private Machine map(MachineForm machineForm) {
