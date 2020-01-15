@@ -47,17 +47,17 @@ public class Machine {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "cpus")
-    Parameters cpus;
+    MachineMetrics cpus;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "json", name = "gpus")
-    Parameters gpus;
+    MachineMetrics gpus;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "memory")
-    Parameters memory;
+    MachineMetrics memory;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "localStorage")
-    Parameters localStorage;
+    MachineMetrics localStorage;
 }

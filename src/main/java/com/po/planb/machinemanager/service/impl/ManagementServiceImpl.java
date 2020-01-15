@@ -83,10 +83,10 @@ public class ManagementServiceImpl implements ManagementService {
                 .supplierId(username)
                 .uuid(UUID.randomUUID().toString())
                 .name(machineForm.getName())
-                .cpus(new Parameters(current, machineForm.getCpu()))
-                .gpus(new Parameters(current, machineForm.getGpu()))
-                .memory(new Parameters(current, machineForm.getMemory()))
-                .localStorage(new Parameters(current, machineForm.getLocalStorage()))
+                .cpus(new MachineMetrics(current, machineForm.getCpu()))
+                .gpus(new MachineMetrics(current, machineForm.getGpu()))
+                .memory(new MachineMetrics(current, machineForm.getMemory()))
+                .localStorage(new MachineMetrics(current, machineForm.getLocalStorage()))
                 .status(Status.UNKNOWN)
                 .build();
     }

@@ -14,5 +14,5 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MachineDetails {
     Long id;
-    List<Parameters> parameters;
+    List<MachineMetrics> parameters;
 }

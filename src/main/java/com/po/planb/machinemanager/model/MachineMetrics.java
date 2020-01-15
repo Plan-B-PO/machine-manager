@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Parameters implements Serializable {
+public class MachineMetrics implements Serializable {
     Double current;
     Double max;
 
