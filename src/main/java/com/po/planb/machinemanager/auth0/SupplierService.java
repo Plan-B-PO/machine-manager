@@ -74,10 +74,11 @@ public class SupplierService {
                 String body = response.getBody();
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
-                    List<Role> roles = objectMapper.readValue(body, new TypeReference<List<Role>>() {
+                    List<Role> roles = objectMapper.readValue(body, new TypeReference<>() {
                     });
-                    System.out.println("ROLE ================ " + roles.get(0).getName());
-                    return roles.get(0).getName();
+                    if (!roles.isEmpty()) {
+                        return roles.get(0).getName();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

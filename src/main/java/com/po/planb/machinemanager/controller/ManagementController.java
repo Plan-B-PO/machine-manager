@@ -28,7 +28,8 @@ public class ManagementController {
     @RequestMapping("/machines")
     public String getMachines(final Map<String, Object> model, final HttpServletRequest req) {
         String username = (String) SessionUtils.get(req, "username");
-        List<Machine> machines = managementService.getMachines(username);
+        String role = (String) SessionUtils.get(req, "role");
+        List<Machine> machines = managementService.getMachines(username, role);
         model.put("machines", machines);
         model.put("supplierId", username);
         return "machines";
