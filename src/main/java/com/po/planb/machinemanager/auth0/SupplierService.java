@@ -5,6 +5,7 @@ import com.auth0.exception.APIException;
 import com.auth0.exception.Auth0Exception;
 import com.auth0.json.auth.UserInfo;
 import com.auth0.net.Request;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -72,9 +74,10 @@ public class SupplierService {
                 String body = response.getBody();
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
-                    Role role = objectMapper.readValue(body, Role.class);
-                    System.out.println("ROLE ================ " + role.getName());
-                    return role.getName();
+                    List<Role> roles = objectMapper.readValue(body, new TypeReference<List<Role>>() {
+                    });
+                    System.out.println("ROLE ================ " + roles.get(0).getName());
+                    return roles.get(0).getName();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
