@@ -1,6 +1,7 @@
 package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
+import com.po.planb.machinemanager.model.MachineComputingStatus;
 import com.po.planb.machinemanager.model.MachineDetails;
 import com.po.planb.machinemanager.service.MachinesService;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,4 +43,15 @@ public class MachinesController {
         machinesService.activateMachine(computationTask.getToken());
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PostMapping("/status/{id}")
+    public ResponseEntity reportMetrics(MachineComputingStatus machineComputingStatus){
+        return new ResponseEntity((HttpStatus.OK));
+    }
+
+//    @PostMapping("/initial-connect")
+//    public void connectMachine(@RequestBody MachineComputingStatus machineComputingStatus) {
+//        String token = ?
+//        machinesService.connectMachine(token);
+//    }
 }

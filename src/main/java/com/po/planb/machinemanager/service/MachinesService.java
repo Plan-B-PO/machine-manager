@@ -10,4 +10,6 @@ public interface MachinesService {
     String registerMachine(MachineDetails machineDetails);
 
     void activateMachine(String token);
+
+//    String connectMachine(String token);
 }
