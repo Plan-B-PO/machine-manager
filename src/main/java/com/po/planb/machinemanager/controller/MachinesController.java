@@ -46,6 +46,7 @@ public class MachinesController {
 
     @PostMapping("/status/{id}")
     public ResponseEntity reportMetrics(MachineComputingStatus machineComputingStatus){
+        //TODO retrieve status and update machine status
         return new ResponseEntity((HttpStatus.OK));
     }
 
