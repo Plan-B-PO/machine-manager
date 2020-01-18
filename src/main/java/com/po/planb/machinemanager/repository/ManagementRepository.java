@@ -21,7 +21,7 @@ public interface ManagementRepository extends CrudRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m WHERE m.status = 1")
     List<Machine> getActiveMachines();
 
-    @Query("UPDATE Machine SET status = :uuid")
+    @Query("UPDATE Machine SET status = 2 WHERE uuid = :uuid")
     void update(@Param("uuid") String uuid);
 
 }

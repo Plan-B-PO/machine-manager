@@ -1,8 +1,8 @@
 package com.po.planb.machinemanager.service.impl;
 
-import com.po.planb.machinemanager.model.Computations.Runnable;
 import com.po.planb.machinemanager.model.Computations.*;
 import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.repository.Computations.ComputationsDataInformationRepository;
 import com.po.planb.machinemanager.repository.Computations.ComputationsRepository;
 import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,11 @@ import java.util.NoSuchElementException;
 @Service
 public class ComputationsServiceImpl implements ComputationsService {
     private final ComputationsRepository computationsRepository;
+    private final ComputationsDataInformationRepository computationsDataInformationRepository;
 
-    public ComputationsServiceImpl(ComputationsRepository computationsRepository) {
+    public ComputationsServiceImpl(ComputationsRepository computationsRepository, ComputationsDataInformationRepository computationsDataInformationRepository) {
         this.computationsRepository = computationsRepository;
+        this.computationsDataInformationRepository = computationsDataInformationRepository;
     }
 
     @Override
@@ -24,8 +26,8 @@ public class ComputationsServiceImpl implements ComputationsService {
     }
 
     @Override
-    public ComputationTask createComputationTask(ComputationTaskForm computationTaskForm) {
-        return computationsRepository.save(map(computationTaskForm));
+    public ComputationTask createComputationTask(ComputationTask computationTask) {
+        return computationsRepository.save(computationTask);
     }
 
     @Override
@@ -40,27 +42,41 @@ public class ComputationsServiceImpl implements ComputationsService {
 
     @Override
     public String checkComputationStatus(String id) {
-        ComputationTask ct = computationsRepository.findById(id);
-        if (ct != null && ct.getStatus() != null) {
-            return ct.getStatus().name();
+        ComputationDataInformation info = computationsDataInformationRepository.findByComputationId(id);
+        if (info != null && info.getStatus() != null) {
+            return info.getStatus().name();
         } else {
-            throw new NoSuchElementException("Element with token: " + id + " cannot be found");
+            throw new NoSuchElementException("Computation with id: " + id + " cannot be found");
         }
     }
 
-    //TODO to refactor
-    private ComputationTask map(ComputationTaskForm form) {
-        ComputationSteps computationSteps = new ComputationSteps(
-                null, "busybox", "command");
-        Runnable runnable = new Runnable(form.getApplication().getId(), computationSteps, form.getVersion());
-        ChosenMachine chosenMachine = new ChosenMachine("machineId", form.getUserId(), runnable, "");
-        return ComputationTask.builder()
-                .id(form.getId())
-                .machine(chosenMachine)
-                .status(ComputationStatus.CREATED)
-                .build();
+    @Override
+    public String createComputationData() {
+        ComputationDataInformation save = computationsDataInformationRepository.save(
+                new ComputationDataInformation(ComputationStatus.CREATED));
+        return save.getComputationId();
+    }
+
+    @Override
+    public void updateComputationData(ComputationDataInformation computationDataInformation) {
+        computationsDataInformationRepository.save(computationDataInformation);
 
     }
+
+
+//    //TODO to refactor
+//    private ComputationTask map(ComputationTask form) {
+//        ComputationStep computationStep = new ComputationStep(
+//                null, "busybox", "command");
+//        Runnable runnable = new Runnable(form.getApplication().getId(), computationStep, form.getVersion());
+//        ChosenMachine chosenMachine = new ChosenMachine("machineId", form.getUserId(), runnable, "");
+//        return ComputationTask.builder()
+//                .id(form.getId())
+//                .machine(chosenMachine)
+//                .status(ComputationStatus.CREATED)
+//                .build();
+//
+//    }
 
     private Params mapStepParamToParams(ComputationStepParam computationStepParam) {
         Params params = new Params();

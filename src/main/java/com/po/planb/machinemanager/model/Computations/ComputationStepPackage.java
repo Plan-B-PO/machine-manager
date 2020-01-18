@@ -12,10 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ComputationApplication {
-    String id;
-    String name;
-    String description;
-    String icon;
-    List<ComputationStepParam> schemas;
+public class ComputationStepPackage {
+    String applicationId;
+    List<ComputationStep> computationSteps;
+    String version;
 }

@@ -1,8 +1,9 @@
 package com.po.planb.machinemanager.controller;
 
-import com.po.planb.machinemanager.model.Computations.ComputationTask;
-import com.po.planb.machinemanager.model.MachineComputingStatus;
+import com.po.planb.machinemanager.model.Computations.ComputationData;
+import com.po.planb.machinemanager.model.Computations.ComputationDataInformation;
 import com.po.planb.machinemanager.model.MachineDetails;
+import com.po.planb.machinemanager.service.ComputationsService;
 import com.po.planb.machinemanager.service.MachinesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,18 +18,20 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/machine-manager/machines")
 public class MachinesController {
 
-    private MachinesService machinesService;
+    private final MachinesService machinesService;
+    private final ComputationsService computationsService;
 
-    @Value("http://34.69.134.162:8080/machine/computation")
+    @Value("http://3.135.236.42:8080/machine/computation")
     private String COMPUTATIONS_ENDPOINT;
 
-    MachinesController(MachinesService machinesService) {
+    MachinesController(MachinesService machinesService, ComputationsService computationsService) {
         this.machinesService = machinesService;
+        this.computationsService = computationsService;
     }
 
     @PostMapping("/status")
-    public void updateComputationTasks(@RequestBody ComputationTask computationTasks) {
-        machinesService.updateComputationTaskStatus(computationTasks);
+    public void updateComputationTasks(@RequestBody ComputationDataInformation computationDataInformation) {
+        computationsService.updateComputationData(computationDataInformation);
     }
 
     @PostMapping
@@ -37,10 +40,10 @@ public class MachinesController {
     }
 
     @PostMapping("/computation")
-    public ResponseEntity activateComputationTask(@RequestBody ComputationTask computationTask) {
+    public ResponseEntity activateComputationTask(@RequestBody ComputationData computationData) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationTask, Void.class);
-        machinesService.activateMachine(computationTask.getToken());
+        machinesService.activateMachine(computationData.getToken());
+        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationData, Void.class);
         return new ResponseEntity(HttpStatus.OK);
     }
 

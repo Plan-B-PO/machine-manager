@@ -6,16 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ComputationTaskForm {
-    String id;
-    String userId;
-    String name;
-    ComputationApplication application;
-    ComputationInput input;
-    String url;
-    String version;
+public class ComputationStep {
+    List<ComputationStepParam> params;
+    String artifactUrl;
+    String command;
 }

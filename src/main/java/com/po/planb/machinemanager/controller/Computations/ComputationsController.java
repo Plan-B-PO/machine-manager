@@ -1,8 +1,8 @@
 package com.po.planb.machinemanager.controller.Computations;
 
 
+import com.po.planb.machinemanager.model.Computations.ComputationData;
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
-import com.po.planb.machinemanager.model.Computations.ComputationTaskForm;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.service.ComputationsService;
@@ -21,7 +21,7 @@ public class ComputationsController {
 
     private final ComputationsService computationsService;
 
-    @Value("http://34.69.134.162:8080/machine/computation")
+    @Value("http://3.135.236.42:8080/machine/computation")
     private String COMPUTATIONS_ENDPOINT;
 
     @Value("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/machines/computation")
@@ -35,14 +35,15 @@ public class ComputationsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity createComputationTask(ComputationTaskForm computationTaskForm) {
-        computationsService.createComputationTask(computationTaskForm);
+    public ResponseEntity createComputationTask(ComputationTask computationTask) {
+        computationsService.createComputationTask(computationTask);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/computations")
-    public ResponseEntity runComputationTask(@RequestBody ComputationTaskForm computationTaskForm) {
-        ComputationTask computationTask = computationsService.createComputationTask(computationTaskForm);
+    public String runComputationTask(@RequestBody ComputationTask computationTask) {
+        ComputationTask ct = computationsService.createComputationTask(computationTask);
+        String computationId = computationsService.createComputationData();
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
                 Objects.requireNonNull(
@@ -52,9 +53,10 @@ public class ComputationsController {
                                 Machine[].class), "Available machines cannot be null"
                 )
         );
-        computationTask.setToken(computationsService.determineBestMachine(machines).getUuid());
-        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationTask, ResponseEntity.class);
-        return new ResponseEntity(HttpStatus.OK);
+        Machine machine = computationsService.determineBestMachine(machines);
+        ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
+        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
+        return computationId;
     }
 
     @DeleteMapping("/computations/{id}")
@@ -64,9 +66,8 @@ public class ComputationsController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping("/check/computation/{id}")
+    @RequestMapping("/computations/{id}")
     public String checkComputationStatus(@PathVariable String id) {
         return computationsService.checkComputationStatus(id);
     }
-
 }

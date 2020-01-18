@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Runnable {
     String applicationId;
-    ComputationSteps computationSteps;
+    ComputationStep computationStep;
     String version;
 
 }
