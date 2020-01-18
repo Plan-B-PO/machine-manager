@@ -44,11 +44,12 @@ public class MachinesController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/status/{id}")
-    public ResponseEntity reportMetrics(MachineComputingStatus machineComputingStatus){
-        //TODO retrieve status and update machine status
-        return new ResponseEntity((HttpStatus.OK));
-    }
+    //Other endopint is used for this task @PostMapping("/status")
+//    @PostMapping("/status/{id}")
+//    public ResponseEntity reportMetrics(MachineComputingStatus machineComputingStatus){
+//        //TODO retrieve status and update machine status
+//        return new ResponseEntity((HttpStatus.OK));
+//    }
 
 //    @PostMapping("/initial-connect")
 //    public void connectMachine(@RequestBody MachineComputingStatus machineComputingStatus) {
