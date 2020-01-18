@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public interface ManagementRepository extends CrudRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m WHERE m.status = 1")
     List<Machine> getActiveMachines();
 
+    @Transactional
     @Modifying
     @Query("UPDATE Machine SET status = 2 WHERE uuid = :uuid")
     void update(@Param("uuid") String uuid);
