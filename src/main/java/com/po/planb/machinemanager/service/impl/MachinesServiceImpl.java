@@ -33,7 +33,7 @@ public class MachinesServiceImpl implements MachinesService {
     }
 
     @Override
-    public void activateMachine(String token) {
-        managementRepository.update(token);
+    public void activateMachine(String uuid) {
+        managementRepository.update(uuid);
     }
 }

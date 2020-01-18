@@ -1,6 +1,7 @@
 package com.po.planb.machinemanager.repository;
 
 import com.po.planb.machinemanager.model.Machine;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +22,7 @@ public interface ManagementRepository extends CrudRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m WHERE m.status = 1")
     List<Machine> getActiveMachines();
 
+    @Modifying
     @Query("UPDATE Machine SET status = 2 WHERE uuid = :uuid")
     void update(@Param("uuid") String uuid);
 
