@@ -66,7 +66,7 @@ public class ComputationsController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping("/computations/{id}")
+    @GetMapping("/computations/{id}")
     public String checkComputationStatus(@PathVariable String id) {
         return computationsService.checkComputationStatus(id);
     }
