@@ -16,6 +16,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Machine name</th>
                 <th scope="col">Status</th>
+                <th th:if="${role} == 'Administrator'" scope="col">Owner</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                     </form>
                 </td>
                 <td th:text="${machine.name}">12345</td>
+                <td th:if="${role} == 'Administrator'" th:text="${machine.supplierId}">12345</td>
                 <td th:text="${machine.status}">12345</td>
             </tr>
             </tbody>

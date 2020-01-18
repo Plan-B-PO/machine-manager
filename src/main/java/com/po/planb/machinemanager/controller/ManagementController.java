@@ -32,6 +32,7 @@ public class ManagementController {
         List<Machine> machines = managementService.getMachines(username, role);
         model.put("machines", machines);
         model.put("supplierId", username);
+        model.put("role", role);
         return "machines";
     }
 
