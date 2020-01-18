@@ -42,7 +42,7 @@ public class ManagementServiceImpl implements ManagementService {
                 return new Result(Boolean.FALSE, "Could not create machine");
             }
         } else {
-            return new Result(Boolean.FALSE, "Wrong machine name");
+            return new Result(Boolean.FALSE, "Machine with that name already exists");
         }
     }
 
