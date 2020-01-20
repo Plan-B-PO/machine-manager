@@ -42,6 +42,7 @@ public class ComputationsController {
 
     @PostMapping("/computations")
     public String runComputationTask(@RequestBody ComputationTask computationTask) {
+        System.out.println(computationTask);
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         String computationId = computationsService.createComputationData();
         RestTemplate restTemplate = new RestTemplate();

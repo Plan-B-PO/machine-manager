@@ -17,5 +17,5 @@ public class ComputationApplication {
     String name;
     String description;
     String icon;
-    List<ComputationStepParam> schemas;
+    List<ComputationStepParam> schema;
 }
