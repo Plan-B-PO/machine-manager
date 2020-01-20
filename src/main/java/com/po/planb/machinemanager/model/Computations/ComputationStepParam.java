@@ -13,4 +13,5 @@ import lombok.experimental.FieldDefaults;
 public class ComputationStepParam {
     String name;
     String type;
+    String defaultValue;
 }
