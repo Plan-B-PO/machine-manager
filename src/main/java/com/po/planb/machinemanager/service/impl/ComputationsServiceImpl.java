@@ -46,7 +46,7 @@ public class ComputationsServiceImpl implements ComputationsService {
         if (info != null && info.getStatus() != null) {
             return info.getStatus();
         } else {
-            throw new NoSuchElementException("Computation with id: " + id + " cannot be found");
+            return null;
         }
     }
 

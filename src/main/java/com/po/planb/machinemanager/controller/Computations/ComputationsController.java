@@ -72,7 +72,12 @@ public class ComputationsController {
 
     @GetMapping(value = "/computations/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    CheckStatusResponse checkComputationStatus(@PathVariable String id) {
-        return new CheckStatusResponse(computationsService.checkComputationStatus(id));
+    ResponseEntity checkComputationStatus(@PathVariable String id) {
+        ComputationStatus computationStatus = computationsService.checkComputationStatus(id);
+        if (computationStatus != null) {
+            return new ResponseEntity(new CheckStatusResponse(computationStatus), HttpStatus.OK);
+        } else {
+            return new ResponseEntity("No computation task with id: " + id, HttpStatus.NOT_FOUND);
+        }
     }
 }
