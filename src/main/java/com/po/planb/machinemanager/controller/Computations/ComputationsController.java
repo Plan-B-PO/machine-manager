@@ -70,7 +70,7 @@ public class ComputationsController {
     }
 
     @GetMapping(value = "/computations/{id}", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity checkComputationStatus(@PathVariable String id) {
+    public @ResponseBody ResponseEntity checkComputationStatus(@PathVariable String id) {
         ComputationStatus computationStatus = computationsService.checkComputationStatus(id);
         if (computationStatus != null) {
             return new ResponseEntity(new CheckStatusResponse(computationStatus), HttpStatus.OK);
