@@ -64,7 +64,7 @@ public class ComputationsController {
     public ResponseEntity cancelComputationTask(@PathVariable String id) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(COMPUTATIONS_ENDPOINT + "/" + id, id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/computations/{id}")
