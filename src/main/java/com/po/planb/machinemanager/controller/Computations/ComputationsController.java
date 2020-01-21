@@ -9,6 +9,7 @@ import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +74,7 @@ public class ComputationsController {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/computations/{id}")
+    @GetMapping(value = "/computations/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ComputationStatus checkComputationStatus(@PathVariable String id) {
         return computationsService.checkComputationStatus(id);
     }
