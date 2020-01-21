@@ -1,20 +1,20 @@
 package com.po.planb.machinemanager.model;
 
-import com.po.planb.machinemanager.model.Computations.ComputationStatus;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Map;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MachineComputingStatus {
-    MachineMetricsAggregator machineMetrics;
-    Map<String, ComputationStatus> computationStatuses;
+public class MachineMetricsAggregator {
+    List<MachineMetrics> cpus;
+    List<MachineMetrics> gpus;
+    List<MachineMetrics> memory;
+    List<MachineMetrics> localStorage;
 }
-

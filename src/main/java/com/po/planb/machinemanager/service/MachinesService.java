@@ -1,6 +1,7 @@
 package com.po.planb.machinemanager.service;
 
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
+import com.po.planb.machinemanager.model.MachineComputingStatus;
 import com.po.planb.machinemanager.model.MachineDetails;
 
 public interface MachinesService {
@@ -11,5 +12,6 @@ public interface MachinesService {
 
     void activateMachine(String token);
 
-//    String connectMachine(String token);
+    String connectMachine(MachineComputingStatus machineComputingStatus, String token);
+
 }

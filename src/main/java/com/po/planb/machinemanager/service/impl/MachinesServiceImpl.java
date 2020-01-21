@@ -1,6 +1,8 @@
 package com.po.planb.machinemanager.service.impl;
 
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
+import com.po.planb.machinemanager.model.Machine;
+import com.po.planb.machinemanager.model.MachineComputingStatus;
 import com.po.planb.machinemanager.model.MachineDetails;
 import com.po.planb.machinemanager.repository.Computations.ComputationsRepository;
 import com.po.planb.machinemanager.repository.MachineDetailsRepository;
@@ -35,5 +37,12 @@ public class MachinesServiceImpl implements MachinesService {
     @Override
     public void activateMachine(String uuid) {
         managementRepository.update(uuid);
+    }
+
+    @Override
+    public String connectMachine(MachineComputingStatus machineComputingStatus, String token) {
+//        Machine machine = managementRepository.findByToken(token);
+//        managementRepository.updateMetrics(machine);
+        return "34";
     }
 }

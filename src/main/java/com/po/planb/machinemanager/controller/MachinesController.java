@@ -2,6 +2,7 @@ package com.po.planb.machinemanager.controller;
 
 import com.po.planb.machinemanager.model.Computations.ComputationData;
 import com.po.planb.machinemanager.model.Computations.ComputationDataInformation;
+import com.po.planb.machinemanager.model.MachineComputingStatus;
 import com.po.planb.machinemanager.model.MachineDetails;
 import com.po.planb.machinemanager.service.ComputationsService;
 import com.po.planb.machinemanager.service.MachinesService;
@@ -64,9 +65,9 @@ public class MachinesController {
 //        return new ResponseEntity((HttpStatus.OK));
 //    }
 
-//    @PostMapping("/initial-connect")
-//    public void connectMachine(@RequestBody MachineComputingStatus machineComputingStatus) {
-//        String token = ?
-//        machinesService.connectMachine(token);
-//    }
+    @PostMapping("/initial-connect")
+    public void connectMachine(@RequestBody MachineComputingStatus machineComputingStatus) {
+//        String id = machinesService.connectMachine(machineComputingStatus, "8abc5d96-f3d2-450b-8514-014d6b10e700");
+//        return id;
+    }
 }
