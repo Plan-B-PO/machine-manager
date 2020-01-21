@@ -53,7 +53,7 @@ public class ComputationsServiceImpl implements ComputationsService {
     @Override
     public String createComputationData() {
         ComputationDataInformation save = computationsDataInformationRepository.save(
-                new ComputationDataInformation(ComputationStatus.CREATED));
+                new ComputationDataInformation(ComputationStatus.WAITING));
         return save.getComputationId();
     }
 
@@ -65,7 +65,7 @@ public class ComputationsServiceImpl implements ComputationsService {
 
     @Override
     public void cancelComputationTask(String id) {
-        computationsDataInformationRepository.save(new ComputationDataInformation(id, ComputationStatus.ABORTED));
+        computationsDataInformationRepository.save(new ComputationDataInformation(id, ComputationStatus.CANCELLED));
     }
 
 

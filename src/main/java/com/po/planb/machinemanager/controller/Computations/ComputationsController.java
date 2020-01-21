@@ -43,7 +43,7 @@ public class ComputationsController {
     }
 
     @PostMapping("/computations")
-    public String runComputationTask(@RequestBody ComputationTask computationTask) {
+    public @ResponseBody String runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
@@ -74,7 +74,7 @@ public class ComputationsController {
     }
 
     @GetMapping("/computations/{id}")
-    public ComputationStatus checkComputationStatus(@PathVariable String id) {
+    public @ResponseBody ComputationStatus checkComputationStatus(@PathVariable String id) {
         return computationsService.checkComputationStatus(id);
     }
 }

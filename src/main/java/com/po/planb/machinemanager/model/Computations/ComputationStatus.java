@@ -1,9 +1,9 @@
 package com.po.planb.machinemanager.model.Computations;
 
 public enum ComputationStatus {
-    CREATED,
-    RUNNING,
+    WAITING,
+    IN_PROGRESS,
     DONE,
     ERROR,
-    ABORTED
+    CANCELLED
 }
