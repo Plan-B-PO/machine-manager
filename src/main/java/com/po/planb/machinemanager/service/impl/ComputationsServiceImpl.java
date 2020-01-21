@@ -41,10 +41,10 @@ public class ComputationsServiceImpl implements ComputationsService {
     }
 
     @Override
-    public String checkComputationStatus(String id) {
+    public ComputationStatus checkComputationStatus(String id) {
         ComputationDataInformation info = computationsDataInformationRepository.findByComputationId(id);
         if (info != null && info.getStatus() != null) {
-            return info.getStatus().name();
+            return info.getStatus();
         } else {
             throw new NoSuchElementException("Computation with id: " + id + " cannot be found");
         }

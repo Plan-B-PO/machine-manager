@@ -16,7 +16,7 @@ public interface ComputationsService {
 
     Machine determineBestMachine(List<Machine> machines);
 
-    String checkComputationStatus(String id);
+    ComputationStatus checkComputationStatus(String id);
 
     String createComputationData();
 

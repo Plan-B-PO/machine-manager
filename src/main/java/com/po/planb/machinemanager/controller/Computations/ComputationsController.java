@@ -2,6 +2,7 @@ package com.po.planb.machinemanager.controller.Computations;
 
 
 import com.po.planb.machinemanager.model.Computations.ComputationData;
+import com.po.planb.machinemanager.model.Computations.ComputationStatus;
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
@@ -9,6 +10,7 @@ import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -43,7 +45,6 @@ public class ComputationsController {
     @PostMapping("/computations")
     public String runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
-        String computationId = computationsService.createComputationData();
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
                 Objects.requireNonNull(
@@ -53,10 +54,15 @@ public class ComputationsController {
                                 Machine[].class), "Available machines cannot be null"
                 )
         );
-        Machine machine = computationsService.determineBestMachine(machines);
-        ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
-        restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
-        return computationId;
+        if (!CollectionUtils.isEmpty(machines)) {
+            String computationId = computationsService.createComputationData();
+            Machine machine = computationsService.determineBestMachine(machines);
+            ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
+            restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
+            return computationId;
+        } else {
+            return "No machine is available";
+        }
     }
 
     @DeleteMapping("/computations/{id}")
@@ -68,7 +74,7 @@ public class ComputationsController {
     }
 
     @GetMapping("/computations/{id}")
-    public String checkComputationStatus(@PathVariable String id) {
+    public ComputationStatus checkComputationStatus(@PathVariable String id) {
         return computationsService.checkComputationStatus(id);
     }
 }
