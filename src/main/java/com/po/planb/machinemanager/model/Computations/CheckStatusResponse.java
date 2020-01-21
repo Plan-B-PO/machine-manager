@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@XmlRootElement
 public class CheckStatusResponse {
     ComputationStatus status;
 }
