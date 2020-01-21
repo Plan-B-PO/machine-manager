@@ -6,6 +6,8 @@ import com.po.planb.machinemanager.model.MachineDetails;
 import com.po.planb.machinemanager.service.ComputationsService;
 import com.po.planb.machinemanager.service.MachinesService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +45,16 @@ public class MachinesController {
     public ResponseEntity activateComputationTask(@RequestBody ComputationData computationData) {
         RestTemplate restTemplate = new RestTemplate();
         machinesService.activateMachine(computationData.getToken());
-        restTemplate.postForObject(COMPUTATIONS_ENDPOINT, computationData, Void.class);
-        return new ResponseEntity(HttpStatus.OK);
+        HttpEntity<ComputationData> request = new HttpEntity<>(computationData);
+        ResponseEntity<Void> response = restTemplate
+                .exchange(COMPUTATIONS_ENDPOINT, HttpMethod.POST, request, Void.class);
+        HttpStatus statusCode = response.getStatusCode();
+        if (statusCode.is2xxSuccessful()) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(
+                    "Machine component failed processing request from Machines", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     //Other endopint is used for this task @PostMapping("/status")
