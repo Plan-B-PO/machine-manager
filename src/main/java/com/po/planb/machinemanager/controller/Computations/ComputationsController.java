@@ -45,23 +45,20 @@ public class ComputationsController {
     ResponseEntity runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         RestTemplate restTemplate = new RestTemplate();
-        String computationId = computationsService.createComputationData();
-        return new ResponseEntity<>(new ComputationTaskId(computationId), HttpStatus.OK);
-
-//        List<Machine> machines = List.of(restTemplate.postForObject(
-//                RESOURCE_ENDPOINT,
-//                new Resource(1d, 1d, 1d, 1d),
-//                Machine[].class)
-//        );
-//        if (!CollectionUtils.isEmpty(machines)) {
-//            String computationId = computationsService.createComputationData();
-//            Machine machine = computationsService.determineBestMachine(machines);
-//            ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
-//            restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
-//            return new ResponseEntity<>(new ComputationTaskId(computationId), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("No machine Available", HttpStatus.NOT_FOUND);
-//        }
+        List<Machine> machines = List.of(restTemplate.postForObject(
+                RESOURCE_ENDPOINT,
+                new Resource(1d, 1d, 1d, 1d),
+                Machine[].class)
+        );
+        if (!CollectionUtils.isEmpty(machines)) {
+            String computationId = computationsService.createComputationData();
+            Machine machine = computationsService.determineBestMachine(machines);
+            ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
+            restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
+            return new ResponseEntity<>(new ComputationTaskId(computationId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No machine Available", HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/computations/{id}")
