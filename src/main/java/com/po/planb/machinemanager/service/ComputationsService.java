@@ -21,4 +21,6 @@ public interface ComputationsService {
     String createComputationData();
 
     void updateComputationData(ComputationDataInformation computationDataInformation);
+
+    void cancelComputationTask(String id);
 }

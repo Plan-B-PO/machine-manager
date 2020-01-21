@@ -42,7 +42,6 @@ public class ComputationsController {
 
     @PostMapping("/computations")
     public String runComputationTask(@RequestBody ComputationTask computationTask) {
-        System.out.println(computationTask);
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         String computationId = computationsService.createComputationData();
         RestTemplate restTemplate = new RestTemplate();
@@ -63,6 +62,7 @@ public class ComputationsController {
     @DeleteMapping("/computations/{id}")
     public ResponseEntity cancelComputationTask(@PathVariable String id) {
         RestTemplate restTemplate = new RestTemplate();
+        computationsService.cancelComputationTask(id);
         restTemplate.delete(COMPUTATIONS_ENDPOINT + "/" + id, id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

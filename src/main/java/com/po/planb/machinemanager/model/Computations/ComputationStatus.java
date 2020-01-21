@@ -4,5 +4,6 @@ public enum ComputationStatus {
     CREATED,
     RUNNING,
     DONE,
-    ERROR
+    ERROR,
+    ABORTED
 }

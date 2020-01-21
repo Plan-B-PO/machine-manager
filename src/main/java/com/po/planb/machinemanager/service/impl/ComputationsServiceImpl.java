@@ -63,6 +63,11 @@ public class ComputationsServiceImpl implements ComputationsService {
 
     }
 
+    @Override
+    public void cancelComputationTask(String id) {
+        computationsDataInformationRepository.save(new ComputationDataInformation(id, ComputationStatus.ABORTED));
+    }
+
 
 //    //TODO to refactor
 //    private ComputationTask map(ComputationTask form) {
