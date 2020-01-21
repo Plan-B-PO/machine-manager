@@ -1,9 +1,7 @@
 package com.po.planb.machinemanager.controller.Computations;
 
 
-import com.po.planb.machinemanager.model.Computations.CheckStatusResponse;
-import com.po.planb.machinemanager.model.Computations.ComputationData;
-import com.po.planb.machinemanager.model.Computations.ComputationTask;
+import com.po.planb.machinemanager.model.Computations.*;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.service.ComputationsService;
@@ -45,7 +43,7 @@ public class ComputationsController {
 
     @PostMapping("/computations")
     public @ResponseBody
-    String runComputationTask(@RequestBody ComputationTask computationTask) {
+    ResponseEntity runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
@@ -61,9 +59,10 @@ public class ComputationsController {
             Machine machine = computationsService.determineBestMachine(machines);
             ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
             restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
-            return computationId;
+            return new ResponseEntity<>(
+                    new ActivateComputationTaskResponse(new ComputationTaskId(computationId)), HttpStatus.ACCEPTED);
         } else {
-            return "No machine is available";
+            return new ResponseEntity<>("No machine Available", HttpStatus.NOT_FOUND);
         }
     }
 
