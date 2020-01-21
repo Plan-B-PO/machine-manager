@@ -55,7 +55,7 @@ public class ComputationsController {
             Machine machine = computationsService.determineBestMachine(machines);
             ComputationData computationData = new ComputationData(ct, machine.getUuid(), computationId);
             restTemplate.postForObject(MACHINE_COMPUTATION_ENDPOINT, computationData, ResponseEntity.class);
-            return new ResponseEntity<>(new ComputationTaskId(computationId), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(new ComputationTaskId(computationId), HttpStatus.OK);
         } else {
             return new ResponseEntity<>("No machine Available", HttpStatus.NOT_FOUND);
         }
