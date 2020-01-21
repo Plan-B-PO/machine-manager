@@ -2,6 +2,8 @@ package com.po.planb.machinemanager.auth0;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,10 +19,11 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
     private static final String PATH = "/error";
 
     @RequestMapping("/error")
-    protected String error(final RedirectAttributes redirectAttributes) throws IOException {
+    protected ResponseEntity error(final RedirectAttributes redirectAttributes) throws IOException {
         logger.error("Handling error");
-        redirectAttributes.addFlashAttribute("error", true);
-        return "redirect:/login";
+        return new ResponseEntity("Unexpected error happened", HttpStatus.INTERNAL_SERVER_ERROR);
+//        redirectAttributes.addFlashAttribute("error", true);
+//        return "redirect:/login";
     }
 
     @Override
