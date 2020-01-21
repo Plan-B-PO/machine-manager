@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/machine-manager/launcher")
@@ -46,13 +45,10 @@ public class ComputationsController {
     ResponseEntity runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         RestTemplate restTemplate = new RestTemplate();
-        List<Machine> machines = List.of(
-                Objects.requireNonNull(
-                        restTemplate.postForObject(
-                                RESOURCE_ENDPOINT,
-                                new Resource(1d, 1d, 1d, 1d),
-                                Machine[].class), "Available machines cannot be null"
-                )
+        List<Machine> machines = List.of(restTemplate.postForObject(
+                RESOURCE_ENDPOINT,
+                new Resource(1d, 1d, 1d, 1d),
+                Machine[].class)
         );
         if (!CollectionUtils.isEmpty(machines)) {
             String computationId = computationsService.createComputationData();
