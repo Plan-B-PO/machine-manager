@@ -80,6 +80,7 @@ public class SupplierService {
                 return body;
             } catch (UnirestException e) {
                 e.printStackTrace();
+                logger.error("Role Exception");
                 throw new IllegalStateException("Role API Exception");
             }
         } catch (APIException exception) {

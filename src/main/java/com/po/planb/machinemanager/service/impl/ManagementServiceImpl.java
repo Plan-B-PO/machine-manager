@@ -7,9 +7,10 @@ import com.po.planb.machinemanager.repository.ManagementRepository;
 import com.po.planb.machinemanager.service.ManagementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,17 +67,13 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public List<Machine> getAvailableMachines(Resource resource) {
         List<Machine> activeMachines = managementRepository.getActiveMachines();
-        List<Machine> filteredActiveMachines = activeMachines
+        return activeMachines
                 .stream()
                 .filter(machine -> machine.getCpus().calculateResourceDifference() > resource.getCpus())
                 .filter(machine -> machine.getGpus().calculateResourceDifference() > resource.getGpus())
                 .filter(machine -> machine.getMemory().calculateResourceDifference() > resource.getMemory())
                 .filter(machine -> machine.getLocalStorage().calculateResourceDifference() > resource.getLocalStorage())
                 .collect(Collectors.toList());
-        if (CollectionUtils.isEmpty(filteredActiveMachines)) {
-            throw new NoSuchElementException("No machines available");
-        }
-        return filteredActiveMachines;
     }
 
     private Machine map(MachineForm machineForm, String username) {
