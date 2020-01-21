@@ -1,8 +1,8 @@
 package com.po.planb.machinemanager.controller.Computations;
 
 
+import com.po.planb.machinemanager.model.Computations.CheckStatusResponse;
 import com.po.planb.machinemanager.model.Computations.ComputationData;
-import com.po.planb.machinemanager.model.Computations.ComputationStatus;
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
@@ -44,7 +44,8 @@ public class ComputationsController {
     }
 
     @PostMapping("/computations")
-    public @ResponseBody String runComputationTask(@RequestBody ComputationTask computationTask) {
+    public @ResponseBody
+    String runComputationTask(@RequestBody ComputationTask computationTask) {
         ComputationTask ct = computationsService.createComputationTask(computationTask);
         RestTemplate restTemplate = new RestTemplate();
         List<Machine> machines = List.of(
@@ -75,7 +76,8 @@ public class ComputationsController {
     }
 
     @GetMapping(value = "/computations/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ComputationStatus checkComputationStatus(@PathVariable String id) {
-        return computationsService.checkComputationStatus(id);
+    public @ResponseBody
+    CheckStatusResponse checkComputationStatus(@PathVariable String id) {
+        return new CheckStatusResponse(computationsService.checkComputationStatus(id));
     }
 }
