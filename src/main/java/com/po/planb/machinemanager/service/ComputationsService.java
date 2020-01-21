@@ -4,6 +4,7 @@ import com.po.planb.machinemanager.model.Computations.ComputationDataInformation
 import com.po.planb.machinemanager.model.Computations.ComputationStatus;
 import com.po.planb.machinemanager.model.Computations.ComputationTask;
 import com.po.planb.machinemanager.model.Machine;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -22,5 +23,5 @@ public interface ComputationsService {
 
     void updateComputationData(ComputationDataInformation computationDataInformation);
 
-    void cancelComputationTask(String id);
+    ResponseEntity cancelComputationTask(String id);
 }

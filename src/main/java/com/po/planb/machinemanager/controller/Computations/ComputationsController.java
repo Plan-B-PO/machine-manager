@@ -6,9 +6,7 @@ import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.model.Resource;
 import com.po.planb.machinemanager.service.ComputationsService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -64,9 +62,18 @@ public class ComputationsController {
     @DeleteMapping("/computations/{id}")
     public ResponseEntity cancelComputationTask(@PathVariable String id) {
         RestTemplate restTemplate = new RestTemplate();
-        computationsService.cancelComputationTask(id);
-        restTemplate.delete(COMPUTATIONS_ENDPOINT + "/" + id, id);
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+        ResponseEntity responseEntity = computationsService.cancelComputationTask(id);
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            HttpEntity<String> request = new HttpEntity<>(id);
+            ResponseEntity<Void> response = restTemplate.exchange(
+                    COMPUTATIONS_ENDPOINT + "/" + id, HttpMethod.DELETE, request, Void.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                return responseEntity;
+            } else
+                return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
     }
 
     @GetMapping(value = "/computations/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

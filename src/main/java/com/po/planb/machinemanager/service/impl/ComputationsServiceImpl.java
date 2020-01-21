@@ -5,10 +5,11 @@ import com.po.planb.machinemanager.model.Machine;
 import com.po.planb.machinemanager.repository.Computations.ComputationsDataInformationRepository;
 import com.po.planb.machinemanager.repository.Computations.ComputationsRepository;
 import com.po.planb.machinemanager.service.ComputationsService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class ComputationsServiceImpl implements ComputationsService {
@@ -64,8 +65,14 @@ public class ComputationsServiceImpl implements ComputationsService {
     }
 
     @Override
-    public void cancelComputationTask(String id) {
-        computationsDataInformationRepository.save(new ComputationDataInformation(id, ComputationStatus.CANCELLED));
+    public ResponseEntity cancelComputationTask(String id) {
+        ComputationDataInformation ct = computationsDataInformationRepository.findByComputationId(id);
+        if (ct != null) {
+            computationsDataInformationRepository.save(new ComputationDataInformation(id, ComputationStatus.CANCELLED));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
