@@ -27,7 +27,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "machines", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
+@Table(name = "machines")
 public class Machine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
