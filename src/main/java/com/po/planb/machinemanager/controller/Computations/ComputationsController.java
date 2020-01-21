@@ -77,7 +77,8 @@ public class ComputationsController {
     }
 
     @GetMapping(value = "/computations/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity checkComputationStatus(@PathVariable String id) {
+    public @ResponseBody
+    ResponseEntity checkComputationStatus(@PathVariable String id) {
         ComputationStatus computationStatus = computationsService.checkComputationStatus(id);
         if (computationStatus != null) {
             return new ResponseEntity(new CheckStatusResponse(computationStatus), HttpStatus.OK);
